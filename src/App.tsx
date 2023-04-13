@@ -1,9 +1,10 @@
 import './index.css'
+import { World } from './layouts/World'
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">React TypeScript Template</h1>
+    <div className="relative w-screen h-screen bg-black">
+      <World />
     </div>
   )
 }
