@@ -6,7 +6,7 @@ interface TopNavigationProps {
 
 export const TopNavigation = ({ children }: TopNavigationProps) => {
   return (
-    <div className="absolute bottom-0 w-full h-56 bg-white/30 z-100">
+    <div className="absolute top-0 w-full h-16  z-100">
       {children}
     </div>
   );
