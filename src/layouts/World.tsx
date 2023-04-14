@@ -33,13 +33,6 @@ export const World = () => {
     }
   };
 
-  const backgroundLabels: Record<Background, string> = {
-    map: 'Map',
-    realmView: 'Realm View',
-    combat: 'Combat',
-    bastion: 'Bastion',
-  };
-
   const backgroundOptions: Background[] = ['map', 'realmView', 'combat', 'bastion'];
 
   return (
