@@ -6,7 +6,7 @@ interface TopNavigationProps {
 
 export const LeftPopNavigation = ({ children }: TopNavigationProps) => {
     return (
-        <div className="fixed top-0 left-0 w-64 h-full p-4 transition-all duration-300 ease-in-out bg-gray-200 dark:bg-gray-800 md:w-48 lg:w-64">
+        <div className="fixed w-16 p-4 -translate-y-1/2 bg-gray-200 rounded-lg top-1/2 left-2 h-min dark:bg-gray-800">
             {children}
         </div>
     );
