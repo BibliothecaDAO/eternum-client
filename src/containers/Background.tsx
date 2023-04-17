@@ -10,7 +10,7 @@ interface BottomNavigationProps {
 
 export const Background = ({ children }: BottomNavigationProps) => {
     return (
-        <div className="w-full h-full">
+        <div className="z-0 w-full h-full">
             {children}
         </div>
     );
