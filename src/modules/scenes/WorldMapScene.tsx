@@ -1,4 +1,5 @@
 import { CameraControls } from '@react-three/drei'
+import WorldMap from '../../components/worldmap/WorldMap'
 
 export const WorldMapScene = () => {
     return (
@@ -6,10 +7,7 @@ export const WorldMapScene = () => {
             <CameraControls />
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <mesh>
-                <sphereGeometry args={[1, 32, 32]} />
-                <meshStandardMaterial color="green" />
-            </mesh>
+            <WorldMap />
         </>
     )
 }

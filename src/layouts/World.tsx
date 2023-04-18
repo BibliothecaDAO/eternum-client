@@ -19,7 +19,7 @@ export const World = () => {
     bastion: 'Bastion',
   };
 
-  const backgroundOptions: Background[] = ['map', 'bastion'];
+  const backgroundOptions: Background[] = ['map', 'bastion', 'realmView'];
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen">

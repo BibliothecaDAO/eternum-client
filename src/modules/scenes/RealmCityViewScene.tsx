@@ -1,7 +1,13 @@
+import { CameraControls } from '@react-three/drei'
+import RealmCityView from '../../components/cityview/RealmCityView'
+
 export const RealmCityViewScene = () => {
     return (
-        <div className="w-full h-full bg-red-100">
-            <h1>Combat</h1>
-        </div>
+        <>
+            <CameraControls />
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <RealmCityView />
+        </>
     )
 }

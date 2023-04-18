@@ -16,6 +16,8 @@ export const MainScene = () => {
                 return <WorldMapScene />;
             case 'bastion':
                 return <BastionScene />;
+            case 'realmView':
+                return <RealmCityViewScene />;
             default:
                 return null;
         }

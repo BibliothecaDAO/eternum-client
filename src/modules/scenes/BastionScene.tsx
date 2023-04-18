@@ -1,4 +1,5 @@
 import { CameraControls } from '@react-three/drei'
+import BastionView from '../../components/bastion/Bastion'
 
 export const BastionScene = () => {
     return (
@@ -6,10 +7,7 @@ export const BastionScene = () => {
             <CameraControls />
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <mesh>
-                <boxGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial color="red" />
-            </mesh>
+            <BastionView />
         </>
     )
 }
