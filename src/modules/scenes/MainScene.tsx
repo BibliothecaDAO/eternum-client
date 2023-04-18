@@ -8,6 +8,7 @@ import useUIStore from "../../hooks/store/useUIStore";
 import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
+import { Environment, Lightformer } from '@react-three/drei'
 
 export const MainScene = () => {
     const activeScene = useUIStore((state) => state.activeScene);
@@ -39,6 +40,28 @@ export const MainScene = () => {
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
         >
             <color attach="background" args={['lightgrey']} />
+            <Environment
+                background
+                files={[
+                    '/envmap/px.png',
+                    '/envmap/nx.png',
+                    '/envmap/py.png',
+                    '/envmap/ny.png',
+                    '/envmap/pz.png',
+                    '/envmap/nz.png',
+                ]}
+                resolution={1024}
+            >
+                <color args={['#000000']} attach="background" />
+                <Lightformer
+                    position-y={10}
+
+                    scale={5}
+                    color="white"
+                    intensity={3}
+                    form="ring"
+                />
+            </Environment>
             <Perf position="top-left" />
             {
                 transition(({ opacity, ...props }, location) => (
@@ -50,7 +73,7 @@ export const MainScene = () => {
                             <Route path="/bastion">
                                 <BastionScene />
                             </Route>
-                            <Route path="/cityview">
+                            <Route path="/realmView">
                                 <RealmCityViewScene />
                             </Route>
                         </Switch>

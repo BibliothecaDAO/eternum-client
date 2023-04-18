@@ -22,18 +22,13 @@ const RealmCityView = () => {
         },
         cityScale:
         {
-            value: 1.05,
+            value: 160.05,
             step: 0.05
         }
     })
 
     return (<group position={[0, -5, 0]}  >
         <primitive object={model.scene} />
-        <mesh>
-            <planeGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color="red" />
-        </mesh>
-
     </group>);
 };
 
