@@ -5,6 +5,7 @@ import { RightPopNavigation } from "../containers/navigation/RightPopNavigation"
 import { TopNavigation } from "../containers/navigation/TopNavigation";
 import { MainScene } from "../modules/scenes/MainScene";
 import useUIStore, { Background } from "../hooks/store/useUIStore";
+import ActiveLink from "../elements/ActiveLink";
 
 
 export const World = () => {
@@ -25,13 +26,13 @@ export const World = () => {
     <div className="fixed top-0 left-0 w-screen h-screen">
       <LeftPopNavigation>
         {backgroundOptions.map((option) => (
-          <button
+          <ActiveLink
             key={option}
-            className={`px-2 ${activeScene === option ? 'text-white' : ''}`}
-            onClick={() => setActiveScene(option)}
+            className={`px-2`}
+            href={"/" + option}
           >
             {backgroundLabels[option]}
-          </button>
+          </ActiveLink>
         ))}
       </LeftPopNavigation>
       <BackgroundContainer>
