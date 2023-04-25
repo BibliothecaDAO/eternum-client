@@ -9,6 +9,10 @@ import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
 import { Environment, Lightformer } from '@react-three/drei'
+import { Suspense } from 'react';
+import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
+import { Sobel } from '../../utils/effects.jsx'
+
 
 export const MainScene = () => {
     const activeScene = useUIStore((state) => state.activeScene);
@@ -63,23 +67,32 @@ export const MainScene = () => {
                 />
             </Environment>
             <Perf position="top-left" />
-            {
-                transition(({ opacity, ...props }, location) => (
-                    <a.group {...props}>
-                        <Switch location={location}>
-                            <Route path="/map">
-                                <WorldMapScene />
-                            </Route>
-                            <Route path="/bastion">
-                                <BastionScene />
-                            </Route>
-                            <Route path="/realmView">
-                                <RealmCityViewScene />
-                            </Route>
-                        </Switch>
-                    </a.group>
-                ))
-            }
+            <Suspense>
+                {
+                    transition(({ opacity, ...props }, location) => (
+                        <a.group {...props}>
+                            <Switch location={location}>
+                                <Route path="/map">
+                                    <WorldMapScene />
+                                </Route>
+                                <Route path="/bastion">
+                                    <BastionScene />
+                                </Route>
+                                <Route path="/realmView">
+                                    <RealmCityViewScene />
+                                </Route>
+                            </Switch>
+                        </a.group>
+                    ))
+                }
+            </Suspense>
+            <EffectComposer>
+                <DepthOfField focusDistance={0} focalLength={1} bokehScale={2} height={480} />
+                <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={100} />
+                <Noise opacity={0.01} />
+                <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                <Sobel />
+            </EffectComposer>
         </Canvas>
     )
 }
