@@ -202,4 +202,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/bastion-transformed.glb')
+useGLTF.preload('/models/bastion-transformed.glb')

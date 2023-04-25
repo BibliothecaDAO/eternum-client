@@ -34,4 +34,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/world_map-transformed.glb')
+useGLTF.preload('/models/world_map-transformed.glb')

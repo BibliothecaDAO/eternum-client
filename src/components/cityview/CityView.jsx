@@ -74,4 +74,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/city_view-transformed.glb')
+useGLTF.preload('/models/city_view-transformed.glb')
