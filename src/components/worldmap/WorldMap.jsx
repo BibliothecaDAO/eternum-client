@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.1.4 public/models/world_map.glb --transform
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useControls, button } from 'leva';
+import { useControls } from 'leva';
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/world_map-transformed.glb')

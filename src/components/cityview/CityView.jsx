@@ -5,11 +5,24 @@ Command: npx gltfjsx@6.1.4 public/models/city_view.glb --transform
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useControls } from 'leva';
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/city_view-transformed.glb')
+  const { cityPosition, cityScale } = useControls({
+    cityPosition:
+    {
+        value: { x: 0, z: 0, y: 0 },
+        step: 0.01
+    },
+    cityScale:
+    {
+        value: 35.05,
+        step: 0.05
+    }
+})
   return (
-    <group {...props} dispose={null}>
+    <group {...props}  scale={[cityScale, cityScale, cityScale]} position={[cityPosition.x, cityPosition.y, cityPosition.z]} dispose={null}>
       <mesh geometry={nodes.archer_tower.geometry} material={materials['Bright Stone']} position={[4.33, 0.39, 2.36]} rotation={[0, -1.48, 0]} />
       <mesh geometry={nodes.barracks.geometry} material={materials['Bright Stone']} />
       <mesh geometry={nodes.mage_tower.geometry} material={materials['Bright Stone']} />
