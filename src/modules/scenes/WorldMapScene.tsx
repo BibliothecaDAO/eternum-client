@@ -6,7 +6,7 @@ import RealmsPositions from '../../components/worldmap/RealmsPositions'
 export const WorldMapScene = () => {
     return (
         <>
-            <CameraControls />
+
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <RealmsPositions />

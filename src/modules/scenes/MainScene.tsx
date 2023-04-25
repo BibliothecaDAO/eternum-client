@@ -8,14 +8,25 @@ import useUIStore from "../../hooks/store/useUIStore";
 import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
-import { Environment, Lightformer } from '@react-three/drei'
-import { Suspense } from 'react';
+import { Environment, Lightformer, useHelper, PerspectiveCamera } from '@react-three/drei'
+import { Suspense, useRef } from 'react';
 import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
+import * as THREE from 'three'
+import { CameraControls, OrbitControls } from '@react-three/drei'
 
+export const Camera = () => {
+    const camera = useRef<any>()
+    useHelper(camera, THREE.CameraHelper)
 
+    return <>
+        <OrbitControls></OrbitControls>
+        <PerspectiveCamera ref={camera} near={1} far={4} position={[0, 0, 0]} ></PerspectiveCamera >
+    </>
+}
 export const MainScene = () => {
     const activeScene = useUIStore((state) => state.activeScene);
+
 
     const [location] = useLocation()
     // Animated shape props
@@ -44,6 +55,7 @@ export const MainScene = () => {
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
         >
             <color attach="background" args={['lightgrey']} />
+            <Camera />
             <Environment
                 background
                 files={[
