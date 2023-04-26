@@ -54,9 +54,15 @@ export const MainScene = () => {
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
         >
-            <color attach="background" args={['lightgrey']} />
+
+            <color attach="background" args={['white']} />
             <Camera />
             <Environment
+                background
+                blur={0.05}
+                files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/table_mountain_2_puresky_1k.hdr"
+            />
+            {/* <Environment
                 background
                 files={[
                     '/envmap/px.png',
@@ -77,7 +83,7 @@ export const MainScene = () => {
                     intensity={3}
                     form="ring"
                 />
-            </Environment>
+            </Environment> */}
             <Perf position="top-left" />
             <Suspense>
                 {
@@ -99,12 +105,13 @@ export const MainScene = () => {
                 }
             </Suspense>
             <EffectComposer>
-                <DepthOfField focusDistance={0} focalLength={1} bokehScale={2} height={480} />
+                <DepthOfField focusDistance={1} focalLength={1} bokehScale={1} height={2000} />
                 <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={100} />
                 <Noise opacity={0.01} />
                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 <Sobel />
             </EffectComposer>
+            <fog attach="fog" color="gray" near={200} far={600} />
         </Canvas>
     )
 }

@@ -61,12 +61,13 @@ const WorldMap = () => {
         }
     })
 
-    return (<group position={[0, -5, 0]}  >
-        <RealmsPositions />
-        <primitive object={model.scene} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}
-        />
-        {/* {geometries.map((geometry, i) => <mesh key={i} geometry={geometry} material={material} />)} */}
-        {/* <mesh>
+    return (
+        <group position={[0, -5, 0]}  >
+            {/* <RealmsPositions /> */}
+            <primitive object={model.scene} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}
+            />
+            {/* {geometries.map((geometry, i) => <mesh key={i} geometry={geometry} material={material} />)} */}
+            {/* <mesh>
       <planeGeometry args={[21.39, 10, 50, 50]} />
       <meshStandardMaterial 
         map={texture} 
@@ -74,7 +75,7 @@ const WorldMap = () => {
         displacementScale={0.3} 
       />
     </mesh> */}
-    </group>);
+        </group>);
 };
 
 export default WorldMap;

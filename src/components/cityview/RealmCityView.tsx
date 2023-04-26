@@ -27,9 +27,11 @@ const RealmCityView = () => {
         }
     })
 
-    return (<group position={[0, -5, 0]}  >
-        <primitive object={model.scene} />
-    </group>);
+    return (
+        <group position={[0, -5, 0]}  >
+            <primitive object={model.scene} />
+        </group>
+    );
 };
 
 export default RealmCityView;

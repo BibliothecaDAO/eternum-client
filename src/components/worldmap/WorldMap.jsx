@@ -24,12 +24,12 @@ export function Model(props) {
   return (
     <group {...props} dispose={null} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
       <mesh geometry={nodes.ocean.geometry} material={materials.Ocean} scale={[1, 1, 0.5]} />
-      <mesh geometry={nodes.continents.geometry} material={materials.Continents} position={[0, 0, 0.01]} scale={[0.89, 0.9, 0.86]} />
-      <group position={[0, 0.21, 0]} scale={[0.85, 1, 0.5]}>
+      <mesh geometry={nodes.continents.geometry} material={materials.Continents} position={[0, -0.0039, 0.01]} scale={[0.89, 0.9, 0.86]} />
+      {/* <group position={[0, 0.21, 0]} scale={[0.85, 1, 0.5]}>
         <mesh geometry={nodes.Plane001.geometry} material={materials.Stone} />
         <mesh geometry={nodes.Plane001_1.geometry} material={materials.Gold} />
-      </group>
-      <mesh geometry={nodes.room.geometry} material={nodes.room.material} position={[0, 0.05, 0]} />
+      </group> */}
+      {/* <mesh geometry={nodes.room.geometry} material={nodes.room.material} position={[0, 0.05, 0]} /> */}
     </group>
   )
 }

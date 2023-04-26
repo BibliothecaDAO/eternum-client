@@ -125,13 +125,14 @@ const RealmsPositions = () => {
         // });
     }
 
-    return <><points onClick={clickHandler} geometry={bufferGeometry} material={realmsMaterial} position={
-        [realmsPosition.x, realmsPosition.y, realmsPosition.z]} rotation={[-Math.PI / 2, 0, 0]}
-        scale={[
-            realmsScale,
-            realmsScale,
-            realmsScale
-        ]} />
+    return <>
+        <points onClick={clickHandler} geometry={bufferGeometry} material={realmsMaterial} position={
+            [realmsPosition.x, realmsPosition.y, realmsPosition.z]} rotation={[-Math.PI / 2, 0, 0]}
+            scale={[
+                realmsScale,
+                realmsScale,
+                realmsScale
+            ]} />
     </>
 }
 
