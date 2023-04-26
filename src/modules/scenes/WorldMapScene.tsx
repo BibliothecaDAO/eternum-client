@@ -8,9 +8,9 @@ export const WorldMapScene = () => {
         <>
 
             <ambientLight />
-            <pointLight position={[10, 10, 10]} />
+            <pointLight position={[0, 5, 0]} />
             <RealmsPositions />
-            <Model />
+            <WorldMap />
         </>
     )
 }
