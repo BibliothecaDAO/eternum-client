@@ -58,7 +58,7 @@ const WorldMap = () => {
         `,
     })
 
-    const land = new THREE.PlaneGeometry(21.39, 10, 3000, 3000);
+    const land = new THREE.PlaneGeometry(21.39, 10, 1000, 1000);
 
     return (
         <mesh rotation={

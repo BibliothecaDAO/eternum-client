@@ -9,7 +9,7 @@ import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
 import { Environment, Lightformer, useHelper, PerspectiveCamera } from '@react-three/drei'
-import { Suspense, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
 import * as THREE from 'three'
@@ -19,9 +19,28 @@ export const Camera = () => {
     const camera = useRef<any>()
     useHelper(camera, THREE.CameraHelper)
 
+    useEffect(() => {
+        camera.current.lookAt(0, 0, 0)
+        camera.current.updateProjectionMatrix()
+    }, [])
+
+
     return <>
-        <OrbitControls></OrbitControls>
-        <PerspectiveCamera ref={camera} near={1} far={4} position={[0, 0, 0]} ></PerspectiveCamera >
+        <OrbitControls
+            onChange={
+                (e) => {
+                    console.log(e)
+                }
+            }
+        ></OrbitControls>
+        <PerspectiveCamera
+            ref={camera}
+            position={[3, 3, 3]}
+            rotation={[0, 0, 0]}
+            fov={90}
+            near={0.001}
+            far={4}
+        />
     </>
 }
 export const MainScene = () => {
@@ -53,6 +72,7 @@ export const MainScene = () => {
     return (
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
+            frameloop='demand'
         >
 
             <color attach="background" args={['white']} />
@@ -104,13 +124,13 @@ export const MainScene = () => {
                     ))
                 }
             </Suspense>
-            <EffectComposer>
+            {/* <EffectComposer>
                 <DepthOfField focusDistance={1} focalLength={1} bokehScale={1} height={2000} />
                 <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={100} />
                 <Noise opacity={0.01} />
                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 <Sobel />
-            </EffectComposer>
+            </EffectComposer> */}
             <fog attach="fog" color="gray" near={200} far={600} />
         </Canvas>
     )

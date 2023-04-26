@@ -10,7 +10,7 @@ export const WorldMapScene = () => {
             <ambientLight />
             <pointLight position={[0, 5, 0]} />
             <RealmsPositions />
-            <WorldMap />
+            <Model />
         </>
     )
 }
