@@ -1,21 +1,15 @@
 import * as THREE from 'three'
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { useThree } from '@react-three/fiber'
-import { useControls, button } from 'leva';
-
+import { useControls } from 'leva';
 import realmsJson from '../../geodata/realms.json';
+import useUIStore from '../../hooks/store/useUIStore';
 
 const RealmsPositions = () => {
 
     const [bufferGeometry, setBufferGeometry] = useState(new THREE.BufferGeometry());
-    const realmsPositions = new Float32Array(realmsJson.features.length * 3);
-    const realmsColors = new Float32Array(realmsJson.features.length * 3);
-    const { camera } = useThree();
-    // const controls = useRef();
 
-    // useEffect(() => {
-    //     if (controls.current) controls.current.maxSpeed = 50;
-    // }, [controls])
+    const setCameraPosition = useUIStore((state) => state.setCameraPosition);
+    const setCameraTarget = useUIStore((state) => state.setCameraTarget);
 
     const { realmsPosition, realmsScale } = useControls({
         realmsPosition:
@@ -27,19 +21,7 @@ const RealmsPositions = () => {
         {
             value: 1,
             step: 0.01
-        },
-        // lookAt: button(() => {
-        //     if (controls) {
-        //         const randomRealmIndex = Math.floor(Math.random() * realmsJson.features.length);
-        //         const point = {
-        //             x: bufferGeometry.attributes.position.array[randomRealmIndex * 3],
-        //             z: bufferGeometry.attributes.position.array[randomRealmIndex * 3 + 1],
-        //             y: bufferGeometry.attributes.position.array[randomRealmIndex * 3 + 2],
-        //         }
-        //         console.log(point)
-        //         controls.current.setLookAt(point.x + 10, 15, point.z + 10, point.x, point.y, point.z, true)
-        //     }
-        // })
+        }
     })
 
     const calculatedPositions = useMemo(() => {
@@ -80,20 +62,10 @@ const RealmsPositions = () => {
     }, [])
 
     const realmsMaterial = new THREE.PointsMaterial({
-        size: 0.3,
+        size: 0.6,
         depthWrite: false,
         vertexColors: true,
     });
-
-
-    const [lookAt, setLookAt] = useState(null);
-
-    // useFrame(() => {
-    //     if (lookAt) {
-    //         //camera.lookAt(lookAt)
-    //     }
-    // })
-
     const clickHandler = (e) => {
         const colors = calculatedColors;
         const positions = calculatedPositions;
@@ -116,13 +88,8 @@ const RealmsPositions = () => {
             new THREE.BufferAttribute(colors, 3)
         );
         setBufferGeometry(newGeometry);
-        // controls.current.setLookAt(point.x + 10, 15, point.z + 10, point.x, point.y, point.z, true)
-        //controls.current.lookInDirectionOf(point.x,point.y,point.z,true)
-
-
-        // gsap.to(controls.current.camera.position, { duration: 1, x: point.x, z: point.y }).then(() => {
-        //     //setLookAt(null);
-        // });
+        setCameraTarget(new THREE.Vector3(point.x, point.y, point.z))
+        setCameraPosition(new THREE.Vector3(point.x + (50 * Math.random() < 1 ? 1 : -1), 35, point.z + 50 * Math.random() < 1 ? 1 : -1))
     }
 
     return <>

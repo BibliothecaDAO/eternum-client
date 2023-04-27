@@ -1,10 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import realmsJson from '../../geodata/realms.json';
 import * as THREE from 'three';
+import useUIStore from '../../hooks/store/useUIStore';
 
 export function Flags (props) {
     const { nodes, materials } = useGLTF('/models/flag-transformed.glb')
+
+    const setCameraPosition = useUIStore((state) => state.setCameraPosition);
+    const setCameraTarget = useUIStore((state) => state.setCameraTarget);
+
+
     const count = realmsJson.features.length;
 
     let woodMesh, flagMesh;
@@ -53,13 +59,35 @@ export function Flags (props) {
 
     woodMesh.instanceMatrix.needsUpdate = true;
     flagMesh.instanceMatrix.needsUpdate = true;
+
+    const clickHandler = (e) => {
+      e.stopPropagation()
+      console.log(e);
+      if ( e.intersections.length > 0 ) {
+        const instanceId = e.intersections[ 0 ].instanceId;
+        const point = e.intersections[ 0 ].point;
+        const scale = new THREE.Vector3(2, 2, 2); // set the desired scale here
+        let woodMatrix = new THREE.Matrix4();
+        let flagMatrix = new THREE.Matrix4();
+        woodMesh.getMatrixAt(instanceId, woodMatrix);
+        flagMesh.getMatrixAt(instanceId, flagMatrix);
+        console.log(woodMatrix)
+        woodMesh.setMatrixAt(instanceId, woodMatrix.scale(scale));
+        flagMesh.setMatrixAt(instanceId, flagMatrix.scale(scale));
+        woodMesh.instanceMatrix.needsUpdate = true;
+        flagMesh.instanceMatrix.needsUpdate = true;
+
+        setCameraTarget(new THREE.Vector3(point.x, point.y, point.z))
+        setCameraPosition(new THREE.Vector3(point.x + (50 * Math.random() < 1 ? 1 : -1), 35, point.z + 50 * Math.random() < 1 ? 1 : -1))
+      }
+    }
     
     return (
       <group {...props} dispose={null} rotation={[
         -Math.PI / 2,
         0,
         0
-      ]}>
+      ]} onClick={clickHandler}>
         <primitive object={woodMesh} />
         <primitive object={flagMesh} />
       </group>

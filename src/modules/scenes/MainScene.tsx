@@ -9,69 +9,40 @@ import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
 import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls } from '@react-three/drei'
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
-import { useControls } from 'leva';
+import { useControls, button } from 'leva';
 import * as THREE from 'three'
+import realmsJson from '../../geodata/realms.json';
+import { CameraControls } from '../../utils/Camera';
 
 export const Camera = () => {
-    const camera = useRef<any>()
-    useHelper(camera, THREE.CameraHelper)
+    const cameraPosition = useUIStore((state) => state.cameraPosition);
+    const setCameraPosition = useUIStore((state) => state.setCameraPosition);
+    const cameraTarget = useUIStore((state) => state.cameraTarget);
+    const setCameraTarget = useUIStore((state) => state.setCameraTarget);
 
-    const {
-        cameraPosition,
-        cameraFov,
-        cameraNear,
-        cameraFar
-    } = useControls({
-        cameraPosition:
-        {
-            value: { x: 0, y: 0, z: 175 },
-            step: 0.01
-        },
-        cameraFov:
-        {
-            value: 45,
-            step: 0.05
-        },
-        cameraNear: {
-            value: 0.001,
-            step: 0.01
-        },
-        cameraFar: {
-            value: 4,
-            step: 0.01
-        }
+    useControls({
+        lookAt: button((id) => {
+            //randomize camera position
+            const randomRealmIndex = Math.floor(Math.random() * realmsJson.features.length);
+            const point = {
+                x: realmsJson.features[randomRealmIndex].xy[0],
+                y: 0.233,
+                z: realmsJson.features[randomRealmIndex].xy[1]
+            }
+            setCameraTarget(new THREE.Vector3(point.x, point.y, point.z))
+            setCameraPosition(new THREE.Vector3(point.x + (25 * Math.random() < 1 ? 1 : -1), 25, point.z + 25 * Math.random() < 1 ? 1 : -1))
+        })
     })
 
-    useEffect(() => {
-        camera.current.lookAt(0, 0, 0)
-        camera.current.updateProjectionMatrix()
-    }, [
-        cameraPosition.x,
-        cameraPosition.y,
-        cameraPosition.z,
-        cameraFov,
-        cameraNear,
-        cameraFar
-    ])
-
-
     return <>
-        <MapControls
-            maxDistance={175}
-            minDistance={25}
-            maxPolarAngle={Math.PI / 3}
-        ></MapControls>
-        <PerspectiveCamera
-            ref={camera}
-            position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
-            rotation={[0, 0, 0]}
-            fov={cameraFov}
-            near={cameraNear}
-            far={cameraFar}
+        <CameraControls
+            position={cameraPosition}
+            target={cameraTarget}
         />
+
     </>
 }
 export const MainScene = () => {
@@ -90,8 +61,7 @@ export const MainScene = () => {
     return (
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
-            camera={{ position: [0, 175, 0], fov: 45 }}
-            frameloop='demand'
+            camera={{ fov: 45 }}
         >
             <Sky azimuth={1} inclination={0.6} distance={1000} />
             <ambientLight />
