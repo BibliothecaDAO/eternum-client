@@ -2,34 +2,6 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import realmsJson from '../../geodata/realms.json';
 import * as THREE from 'three';
-// Source: https://gist.github.com/gre/1650294
-const easeOutCubic = function ( t ) {
-
-    return ( -- t ) * t * t + 1;
-
-};
-// Scaling curve causes particles to grow quickly, ease gradually into full scale, then
-// disappear quickly. More of the particle's lifetime is spent around full scale.
-const scaleCurve = function ( t ) {
-
-    return Math.abs( easeOutCubic( ( t > 0.5 ? 1 - t : t ) * 2 ) );
-
-};
-
-function resampleParticle( i ) {
-
-  sampler.sample( _position, _normal );
-  _normal.add( _position );
-
-  dummy.position.copy( _position );
-  dummy.scale.set( scales[ i ], scales[ i ], scales[ i ] );
-  dummy.lookAt( _normal );
-  dummy.updateMatrix();
-
-  stemMesh.setMatrixAt( i, dummy.matrix );
-  blossomMesh.setMatrixAt( i, dummy.matrix );
-
-}
 
 export function Flags (props) {
     const { nodes, materials } = useGLTF('/models/flag-transformed.glb')
@@ -72,7 +44,6 @@ export function Flags (props) {
         //random
         Math.random() * Math.PI * 2
       );
-      dummy.scale.set( 1,1,1 );
       dummy.updateMatrix();
 
       woodMesh.setMatrixAt( i, dummy.matrix );
