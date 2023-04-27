@@ -8,38 +8,69 @@ import useUIStore from "../../hooks/store/useUIStore";
 import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
-import { Environment, Lightformer, useHelper, PerspectiveCamera } from '@react-three/drei'
+import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls } from '@react-three/drei'
 import { Suspense, useEffect, useRef } from 'react';
 import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
+import { useControls } from 'leva';
 import * as THREE from 'three'
-import { CameraControls, OrbitControls } from '@react-three/drei'
 
 export const Camera = () => {
     const camera = useRef<any>()
     useHelper(camera, THREE.CameraHelper)
 
+    const {
+        cameraPosition,
+        cameraFov,
+        cameraNear,
+        cameraFar
+    } = useControls({
+        cameraPosition:
+        {
+            value: { x: 0, y: 0, z: 175 },
+            step: 0.01
+        },
+        cameraFov:
+        {
+            value: 45,
+            step: 0.05
+        },
+        cameraNear: {
+            value: 0.001,
+            step: 0.01
+        },
+        cameraFar: {
+            value: 4,
+            step: 0.01
+        }
+    })
+
     useEffect(() => {
         camera.current.lookAt(0, 0, 0)
         camera.current.updateProjectionMatrix()
-    }, [])
+    }, [
+        cameraPosition.x,
+        cameraPosition.y,
+        cameraPosition.z,
+        cameraFov,
+        cameraNear,
+        cameraFar
+    ])
 
 
     return <>
-        <OrbitControls
-            onChange={
-                (e) => {
-                    console.log(e)
-                }
-            }
-        ></OrbitControls>
+        <MapControls
+            maxDistance={175}
+            minDistance={25}
+            maxPolarAngle={Math.PI / 3}
+        ></MapControls>
         <PerspectiveCamera
             ref={camera}
-            position={[3, 3, 3]}
+            position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
             rotation={[0, 0, 0]}
-            fov={90}
-            near={0.001}
-            far={4}
+            fov={cameraFov}
+            near={cameraNear}
+            far={cameraFar}
         />
     </>
 }
@@ -56,54 +87,16 @@ export const MainScene = () => {
         config: () => (n) => n === "opacity" && { friction: 60 },
     })
 
-    const renderActiveScene = (): JSX.Element | null => {
-        switch (activeScene) {
-            case 'map':
-                return <WorldMapScene />;
-            case 'bastion':
-                return <BastionScene />;
-            case 'realmView':
-                return <RealmCityViewScene />;
-            default:
-                return null;
-        }
-    };
-
     return (
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
+            camera={{ position: [0, 175, 0], fov: 45 }}
             frameloop='demand'
         >
-
-            <color attach="background" args={['white']} />
+            <Sky azimuth={1} inclination={0.6} distance={1000} />
+            <ambientLight />
             <Camera />
-            <Environment
-                background
-                blur={0.05}
-                files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/table_mountain_2_puresky_1k.hdr"
-            />
-            {/* <Environment
-                background
-                files={[
-                    '/envmap/px.png',
-                    '/envmap/nx.png',
-                    '/envmap/py.png',
-                    '/envmap/ny.png',
-                    '/envmap/pz.png',
-                    '/envmap/nz.png',
-                ]}
-                resolution={1024}
-            >
-                <color args={['#000000']} attach="background" />
-                <Lightformer
-                    position-y={10}
-
-                    scale={5}
-                    color="white"
-                    intensity={3}
-                    form="ring"
-                />
-            </Environment> */}
+            <pointLight position={[10, 10, 10]} />
             <Perf position="top-left" />
             <Suspense>
                 {
@@ -131,7 +124,7 @@ export const MainScene = () => {
                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 <Sobel />
             </EffectComposer> */}
-            <fog attach="fog" color="gray" near={200} far={600} />
+            <fog attach="fog" color="skyblue" near={150} far={360} />
         </Canvas>
     )
 }
