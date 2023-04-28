@@ -13,6 +13,8 @@ interface UIStore {
     setCameraPosition: (position: any) => void,
     cameraTarget: any,
     setCameraTarget: (target: any) => void,
+    showRealmsFlags: boolean,
+    setShowRealmsFlags: (show: boolean) => void,
 }
 
 const useUIStore = create<UIStore & PopupsStore>((set) => ({
@@ -22,10 +24,12 @@ const useUIStore = create<UIStore & PopupsStore>((set) => ({
     toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
     activeScene: 'map',
     setActiveScene: (scene) => set({ activeScene: scene }),
-    cameraPosition: { x: 0, y: 175, z: 0 },
+    cameraPosition: { x: 0, y: 700, z: 0 },
     setCameraPosition: (position) => set({ cameraPosition: position }),
     cameraTarget: { x: 0, y: 0, z: 0 },
     setCameraTarget: (target) => set({ cameraTarget: target }),
+    showRealmsFlags: false,
+    setShowRealmsFlags: (show) => set({ showRealmsFlags: show }),
     ...createPopupsSlice(set),
 }));
 

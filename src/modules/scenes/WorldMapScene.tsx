@@ -7,7 +7,7 @@ export const WorldMapScene = () => {
 
     return (
         <>
-            <RealmsPositions />
+            {/* <RealmsPositions /> */}
             <Flags scale={[1, 1, 1]} position={[0, 2, 0]} />
             <Model />
         </>

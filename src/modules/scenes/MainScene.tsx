@@ -29,11 +29,11 @@ export const Camera = () => {
             const randomRealmIndex = Math.floor(Math.random() * realmsJson.features.length);
             const point = {
                 x: realmsJson.features[randomRealmIndex].xy[0],
-                y: 0.233,
-                z: realmsJson.features[randomRealmIndex].xy[1]
+                y: -0.7,
+                z: realmsJson.features[randomRealmIndex].xy[1] * -1
             }
             setCameraTarget(new THREE.Vector3(point.x, point.y, point.z))
-            setCameraPosition(new THREE.Vector3(point.x + (25 * Math.random() < 1 ? 1 : -1), 25, point.z + 25 * Math.random() < 1 ? 1 : -1))
+            setCameraPosition(new THREE.Vector3(point.x + 25 * (Math.random() < 0.5 ? 1 : -1), 25, point.z + 25 * (Math.random() < 0.5 ? 1 : -1)))
         })
     })
 
@@ -61,7 +61,7 @@ export const MainScene = () => {
     return (
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
-            camera={{ fov: 45 }}
+            camera={{ fov: 15, position: [0, 700, 0] }}
         >
             <Sky azimuth={1} inclination={0.6} distance={1000} />
             <ambientLight />
@@ -94,7 +94,7 @@ export const MainScene = () => {
                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 <Sobel />
             </EffectComposer> */}
-            <fog attach="fog" color="skyblue" near={150} far={360} />
+            <fog attach="fog" color="skyblue" near={700} far={950} />
         </Canvas>
     )
 }

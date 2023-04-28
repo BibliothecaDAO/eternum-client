@@ -4,6 +4,7 @@ import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
+import useUIStore from "../hooks/store/useUIStore";
 
 interface Point {
     x: number;
@@ -16,6 +17,7 @@ interface Props {
     target: Point;
 }
 const CameraControls = ({ position, target }: Props) => {
+
     const {
         camera,
         gl: { domElement },
@@ -57,9 +59,10 @@ const CameraControls = ({ position, target }: Props) => {
             ref={ref}
             args={[camera, domElement]}
             panSpeed={1}
-            maxDistance={175}
+            maxDistance={700}
             minDistance={25}
             maxPolarAngle={Math.PI / 3}
+            makeDefault
         />
     );
 };
