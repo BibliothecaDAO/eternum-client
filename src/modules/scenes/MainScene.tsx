@@ -48,6 +48,16 @@ export const Camera = () => {
 export const MainScene = () => {
     const activeScene = useUIStore((state) => state.activeScene);
 
+    const {
+        lightPosition
+    } = useControls({
+        lightPosition:
+        {
+            value: { x: 0, y: 100, z: -15 },
+            step: 0.01
+        },
+    })
+
 
     const [location] = useLocation()
     // Animated shape props
@@ -63,11 +73,11 @@ export const MainScene = () => {
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
             camera={{ fov: 15, position: [0, 700, 0] }}
         >
+            <Perf position="top-left" />
             <Sky azimuth={1} inclination={0.6} distance={1000} />
             <ambientLight />
             <Camera />
-            <pointLight position={[10, 10, 10]} />
-            <Perf position="top-left" />
+            <pointLight position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
             <Suspense>
                 {
                     transition(({ opacity, ...props }, location) => (

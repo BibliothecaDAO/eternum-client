@@ -9,7 +9,7 @@ import { useGLTF } from '@react-three/drei'
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/bastion-transformed.glb')
   return (
-    <group {...props} dispose={null}>
+    <group {...props} scale={[0.25,0.25,0.25]} dispose={null}>
       <mesh geometry={nodes.base.geometry} material={materials.Room_Stone} position={[-1.04, -162.07, 0.27]} rotation={[-Math.PI, 0, -Math.PI]} scale={[-517.77, -98.55, -517.77]} />
       <group position={[-1, 8.3, -0.61]} rotation={[-Math.PI, Math.PI / 4, -Math.PI]}>
         <mesh geometry={nodes.center002.geometry} material={materials.Gold} />
