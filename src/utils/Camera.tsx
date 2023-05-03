@@ -58,7 +58,7 @@ const CameraControls = ({ position, target }: Props) => {
         <MapControls
             ref={ref}
             args={[camera, domElement]}
-            panSpeed={1}
+            panSpeed={2}
             maxDistance={700}
             minDistance={25}
             maxPolarAngle={Math.PI / 3}

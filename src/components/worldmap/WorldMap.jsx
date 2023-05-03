@@ -12,12 +12,12 @@ import * as THREE from 'three';
 const WaterModel = () => {
   const params = {
     color: '#ffffff',
-    scale: 20,
+    scale: 30,
     flowX: 1,
     flowY: 1
   };
 
-  const waterGeometry = new THREE.PlaneGeometry( 2, 2 );
+  const waterGeometry = new THREE.PlaneGeometry( 4, 4 );
   const textureLoader = new THREE.TextureLoader();
   const flowMap = textureLoader.load( 'textures/water/Water_1_M_Flow.jpg' );
 
@@ -31,7 +31,7 @@ const WaterModel = () => {
   return (
     <primitive object={water}
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, 0.002, 0]}
+      position={[0, 0.001, 0]}
     />
   )
 }
@@ -52,14 +52,14 @@ export function Model(props) {
   return (<>      
     <group {...props} dispose={null} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
       <WaterModel />
-      <mesh geometry={nodes.ocean.geometry} material={materials.Ocean} position={[0, -0.001, 0]} scale={[4, 1, 4]} />
+      <mesh geometry={nodes.ocean.geometry} material={materials.Ocean} position={[0, -0.01, 0]} scale={[4, 1, 4]} />
       {/* <mesh position={[0,0,0]} rotation={
         [-Math.PI / 2, 0, 0]
       }>
         <planeGeometry args={[20, 20]} />
         <meshBasicMaterial color="skyblue" />
       </mesh> */}
-      <mesh geometry={nodes.continents.geometry} material={materials.Continents} position={[0, 0.003, 0]} scale={[0.89, 0.9, 0.86]} />
+      <mesh geometry={nodes.continents.geometry} material={materials.Continents} position={[0, 0.01, 0]} scale={[0.89, 0.9, 0.86]} />
     </group>
     </>
   )

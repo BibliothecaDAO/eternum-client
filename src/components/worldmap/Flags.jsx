@@ -100,7 +100,7 @@ export function Flags (props) {
       for ( let i = 0; i < count; i ++ ) {
         const x = realmsJson.features[i].xy[0];
         const y = realmsJson.features[i].xy[1];
-        const z = -0.7
+        const z = 1
         const _position = new THREE.Vector3( x, y, z );
         const dummy = new THREE.Object3D();
         dummy.position.copy( _position );

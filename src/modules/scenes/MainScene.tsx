@@ -8,9 +8,9 @@ import useUIStore from "../../hooks/store/useUIStore";
 import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
-import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls } from '@react-three/drei'
+import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls, AdaptiveDpr, AdaptiveEvents } from '@react-three/drei'
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext } from '@react-three/postprocessing'
+import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext, SMAA, Sepia } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
 import { useControls, button } from 'leva';
 import * as THREE from 'three'
@@ -72,13 +72,21 @@ export const MainScene = () => {
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
             camera={{ fov: 15, position: [0, 700, 0] }}
+            gl={
+                {
+                    powerPreference: "high-performance",
+                    antialias: false,
+                    stencil: false,
+                    depth: false,
+                }
+            }
         >
             <Perf position="top-left" />
-            <Sky azimuth={1} inclination={0.6} distance={1000} />
+            {/* <Sky azimuth={1} inclination={0.6} distance={1000} /> */}
             <ambientLight />
             <Camera />
             <pointLight position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
-            <Suspense>
+            <Suspense fallback={null}>
                 {
                     transition(({ opacity, ...props }, location) => (
                         <a.group {...props}>
@@ -97,13 +105,13 @@ export const MainScene = () => {
                     ))
                 }
             </Suspense>
-            {/* <EffectComposer>
-                <DepthOfField focusDistance={1} focalLength={1} bokehScale={1} height={2000} />
-                <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={100} />
-                <Noise opacity={0.01} />
-                <Vignette eskil={false} offset={0.1} darkness={1.1} />
-                <Sobel />
-            </EffectComposer> */}
+            <EffectComposer multisampling={0}>
+                <SMAA />
+                <Vignette eskil={false} offset={0.1} darkness={0.8} />
+                {/* <Noise opacity={0.03} /> */}
+            </EffectComposer>
+            <AdaptiveDpr />
+            <AdaptiveEvents />
             <fog attach="fog" color="skyblue" near={700} far={950} />
         </Canvas>
     )
