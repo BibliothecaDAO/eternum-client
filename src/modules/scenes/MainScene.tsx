@@ -73,6 +73,7 @@ export const MainScene = () => {
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
             camera={{ fov: 15, position: [0, 700, 0] }}
+            dpr={[1, 2]}
             gl={
                 {
                     powerPreference: "high-performance",
