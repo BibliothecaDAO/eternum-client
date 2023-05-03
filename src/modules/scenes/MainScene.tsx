@@ -16,6 +16,7 @@ import { useControls, button } from 'leva';
 import * as THREE from 'three'
 import realmsJson from '../../geodata/realms.json';
 import { CameraControls } from '../../utils/Camera';
+import { BlendFunction } from 'postprocessing'
 
 export const Camera = () => {
     const cameraPosition = useUIStore((state) => state.cameraPosition);
@@ -108,7 +109,11 @@ export const MainScene = () => {
             <EffectComposer multisampling={0}>
                 <SMAA />
                 <Vignette eskil={false} offset={0.1} darkness={0.8} />
-                {/* <Noise opacity={0.03} /> */}
+                <Noise
+                    premultiply
+                    blendFunction={BlendFunction.SOFT_LIGHT}
+                    opacity={0.5}
+                />
             </EffectComposer>
             <AdaptiveDpr />
             <AdaptiveEvents />
