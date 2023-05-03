@@ -113,7 +113,7 @@ export const MainScene = () => {
                 <Noise
                     premultiply
                     blendFunction={BlendFunction.SOFT_LIGHT}
-                    opacity={0.5}
+                    opacity={0.3}
                 />
             </EffectComposer>
             <AdaptiveDpr />
