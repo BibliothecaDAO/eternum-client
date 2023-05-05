@@ -54,7 +54,7 @@ export const MainScene = () => {
     } = useControls({
         lightPosition:
         {
-            value: { x: 0, y: 100, z: -15 },
+            value: { x: 0, y: 10, z: 15 },
             step: 0.01
         },
     })
@@ -80,6 +80,7 @@ export const MainScene = () => {
                     antialias: false,
                     stencil: false,
                     depth: false,
+                    logarithmicDepthBuffer: true,
                 }
             }
         >
@@ -115,7 +116,6 @@ export const MainScene = () => {
                     blendFunction={BlendFunction.SOFT_LIGHT}
                     opacity={0.3}
                 />
-                <Bloom />
             </EffectComposer>
             <AdaptiveDpr />
             <AdaptiveEvents />

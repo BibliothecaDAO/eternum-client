@@ -12,31 +12,32 @@ import * as THREE from 'three';
 const WaterModel = () => {
   const params = {
     color: '#ffffff',
-    scale: 5,
+    scale: 100,
     flowX: 1,
     flowY: 1
   };
 
-  const waterGeometry = new THREE.PlaneGeometry( 4, 4 );
+  const waterGeometry = new THREE.PlaneGeometry( 500, 500 );
   const textureLoader = new THREE.TextureLoader();
   const flowMap = textureLoader.load( 'textures/water/Water_1_M_Flow.jpg' );
 
   let water = new Water( waterGeometry, {
     color: params.color,
     scale: params.scale,
-    flowMap: flowMap,
+    flowDirection: new THREE.Vector2( params.flowX, params.flowY ),
     textureWidth: 1024,
-    textureHeight: 1024
+    textureHeight: 1024,
   } );
   return (
     <primitive object={water}
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, 0.001, 0]}
+      position={[0, 0, 0]}
     />
   )
 }
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/world_map_13-transformed.glb')
+  const { nodes: nodes2, materials: materials2 } = useGLTF('/models/world_map_8-transformed.glb')
   const { worldmapPosition, worldmapScale, metalness, roughness } = useControls({
       worldmapPosition:
       {
@@ -103,20 +104,17 @@ export function Model(props) {
   }, [])
 
   return (<>      
-    <group {...props} dispose={null} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
-      {/* <WaterModel />
-      <mesh geometry={nodes.ocean.geometry} material={materials.Ocean} position={[0,-0.01,0]} scale={[3, 1, 3]} />
-      <mesh geometry={nodes.realms_worldTextures_topography_3002.geometry}>
+    <group {...props} dispose={null}>
+      <WaterModel />
+      <mesh geometry={nodes2.ocean.geometry} material={materials2.Ocean} position={[0,-0.01,0]}  scale={[worldmapScale, worldmapScale, worldmapScale]} />
+      <mesh geometry={nodes.continents.geometry} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
         <meshStandardMaterial flatShading vertexColors metalness={metalness} roughness={roughness}>
         </meshStandardMaterial>
-      </mesh> */}
-      <mesh geometry={nodes.continents.geometry}>
-      <meshStandardMaterial flatShading vertexColors metalness={metalness} roughness={roughness}>
-        </meshStandardMaterial>
-        </mesh>
+      </mesh>
     </group>
     </>
   )
 }
 
 useGLTF.preload('/models/world_map_13-transformed.glb')
+useGLTF.preload('/models/world_map_8-transformed.glb')
