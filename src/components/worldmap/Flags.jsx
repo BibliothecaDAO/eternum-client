@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import realmsJson from '../../geodata/realms.json';
+import realmsOrders from '../../geodata/realms_raw.json';
 import * as THREE from 'three';
 import useUIStore from '../../hooks/store/useUIStore';
 import { useSpring, animated } from '@react-spring/three'
@@ -10,21 +11,39 @@ import { useControls } from 'leva';
 
 const count = realmsJson.features.length;
 
+const orders = [
+  'Fox', 'Detection', 'Reflection', 'Twins', 'Power', 'Titans', 'Giants', 'Skill', 'Enlightenment', 'Protection', 'Perfection', 'Brilliance', 'Anger', 'Rage', 'Vitriol', 'Fury'
+]
+
+realmsJson.features = realmsJson.features.map((feature, index) => {
+  const order = realmsOrders[index].order;
+  return {
+    ...feature,
+    order: order.replace('the ', '')
+  }
+})
+
+const ordersRealms = orders.map((order) => {
+  return realmsJson.features.filter((feature) => feature.order === order)
+})
+
 export function Flags (props) {
-    const { nodes, materials } = useGLTF('/models/flag-transformed.glb')
+    const { nodes, materials } = useGLTF('/models/flags_1-transformed.glb')
+
+
 
     const setCameraPosition = useUIStore((state) => state.setCameraPosition);
     const setCameraTarget = useUIStore((state) => state.setCameraTarget);
     const showRealmsFlags = useUIStore((state) => state.showRealmsFlags);
     const setShowRealmsFlags = useUIStore((state) => state.setShowRealmsFlags);
 
-    const [woodInstances, setWoodInstances] = useState(null);
-    const [flagInstances, setFlagInstances] = useState(null);
+    const [woodInstances, setWoodInstances] = useState([]);
+    const [flagInstances, setFlagInstances] = useState([]);
 
     const { flagsPosition, flagsScale } = useControls({
       flagsPosition:
       {
-          value: { x: -0.38, z: 0, y: -0.17 },
+          value: { x: -0.38, z: 0, y: -0.04 },
           step: 0.01
       },
       flagsScale:
@@ -38,14 +57,17 @@ export function Flags (props) {
     const tempObject = new THREE.Object3D();
     let matrix = new THREE.Matrix4();
 
-    const updateFlagScale = (id, _scale) => {
+    const updateFlagScale = (id, _scale, meshIndex) => {
+      if (!woodInstances.length || !flagInstances.length) return;
       scale.set(_scale, _scale, _scale);
-      woodInstances.getMatrixAt(id, matrix);
+      //woodInstances.getMatrixAt(id, matrix);
+      woodInstances[meshIndex].getMatrixAt(id, matrix);
       matrix.decompose(tempObject.position, tempObject.quaternion, tempObject.scale);
       tempObject.scale.copy(scale);
       tempObject.updateMatrix();
-      woodInstances.setMatrixAt(id, tempObject.matrix);
-      flagInstances.setMatrixAt(id, tempObject.matrix);
+      
+      woodInstances[meshIndex].setMatrixAt(id, tempObject.matrix);
+      flagInstances[meshIndex].setMatrixAt(id, tempObject.matrix);
     }
 
     useFrame(({ camera }) => {
@@ -59,11 +81,11 @@ export function Flags (props) {
     })
 
     useEffect(() => {
-      if (!woodInstances || !flagInstances) return;
+      if (!woodInstances.length || !flagInstances.length) return;
 
       const scales = {
-        startScale: showRealmsFlags ? 0.01 : 1,
-        endScale: showRealmsFlags ? 1 : 0.01
+        startScale: showRealmsFlags ? 0.01 : 0.5,
+        endScale: showRealmsFlags ? 0.5 : 0.01
       }
       const tl = gsap.timeline();
       tl.to(scales, {
@@ -72,11 +94,18 @@ export function Flags (props) {
         ease: 'Bounce.easeOut',
         onUpdate: () => {
           //console.log('scales.startScale', scales.startScale);
-          for ( let i = 0; i < count; i ++ ) {
-            updateFlagScale(i, scales.startScale);
-          }
-          woodInstances.instanceMatrix.needsUpdate = true;
-          flagInstances.instanceMatrix.needsUpdate = true;
+          ordersRealms.forEach((orderRealms, index) => {
+            orderRealms.forEach((realm, i) => {
+              updateFlagScale(i, scales.startScale, index);
+            })
+          })
+          
+          woodInstances.forEach((woodInstance) => {
+            woodInstance.instanceMatrix.needsUpdate = true;
+          })
+          flagInstances.forEach((flagInstance) => {
+            flagInstance.instanceMatrix.needsUpdate = true;
+          })
         }
       })
 
@@ -85,17 +114,20 @@ export function Flags (props) {
 
     useEffect(() => {
 
-      let woodMesh, flagMesh;
+      let woodMeshes, flagMeshes;
       let woodGeometry, flagGeometry;
-      let woodMaterial, flagMaterial;
+      let woodMaterial;
   
-      const _woodMesh = nodes.Cylinder_1.geometry;
-      const _flagMesh = nodes.Cylinder.geometry;
+      const _woodMesh = nodes.Plane003_1.geometry;
+      const _flagMesh = nodes.Plane003.geometry;
   
       woodGeometry = _woodMesh.clone();
       flagGeometry = _flagMesh.clone();
-      woodMaterial = materials.wood
-      flagMaterial = materials.flag
+      woodMaterial = materials.Wood
+      
+
+      const _position = new THREE.Vector3();
+      const dummy = new THREE.Object3D();
   
       const defaultTransform = new THREE.Matrix4()
             .makeRotationX( -Math.PI / 2 )
@@ -105,31 +137,37 @@ export function Flags (props) {
       flagGeometry.applyMatrix4( defaultTransform );
   
   
-      woodMesh = new THREE.InstancedMesh( woodGeometry, woodMaterial, count )
-      flagMesh = new THREE.InstancedMesh( flagGeometry, flagMaterial, count )
+      //woodMesh = new THREE.InstancedMesh( woodGeometry, woodMaterial, count )
+      //flagMesh = new THREE.InstancedMesh( flagGeometry, flagMaterial, count )
+      woodMeshes = orders.map((order, i) => new THREE.InstancedMesh( woodGeometry, woodMaterial, ordersRealms[i].length ))
+      flagMeshes = orders.map((order, i) => new THREE.InstancedMesh( flagGeometry, materials[order], ordersRealms[i].length ))
 
-      woodMesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
-      flagMesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
+      woodMeshes.forEach((woodMesh) => {
+        woodMesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
+      })
+      flagMeshes.forEach((flagMesh) => {
+        flagMesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
+      })
   
-      for ( let i = 0; i < count; i ++ ) {
-        const x = realmsJson.features[i].xy[0];
-        const y = realmsJson.features[i].xy[1];
-        const z = -0.7
-        const _position = new THREE.Vector3( x, y, z );
-        const dummy = new THREE.Object3D();
-        dummy.position.copy( _position );
-        dummy.rotateZ(
-          //random
-          Math.random() * Math.PI * 2
-        );
-        dummy.updateMatrix();
-  
-        woodMesh.setMatrixAt( i, dummy.matrix );
-        flagMesh.setMatrixAt( i, dummy.matrix );
-  
-      }
-      setWoodInstances(woodMesh);
-      setFlagInstances(flagMesh);
+      ordersRealms.forEach((orderRealms, index) => {
+        orderRealms.forEach((realm, i) => {
+          const x = realm.xy[0];
+          const y = realm.xy[1];
+          const z = -0.7
+          _position.set( x, y, z );
+          dummy.position.copy( _position );
+          dummy.rotateZ(
+            //random
+            Math.random() * Math.PI * 2
+          );
+          dummy.updateMatrix();
+
+          woodMeshes[index].setMatrixAt( i, dummy.matrix );
+          flagMeshes[index].setMatrixAt( i, dummy.matrix );
+        })
+      })
+      setWoodInstances(woodMeshes);
+      setFlagInstances(flagMeshes);
     }, [])
 
     const clickHandler = (e) => {
@@ -159,8 +197,14 @@ export function Flags (props) {
         Math.PI,
         0
       ]} onClick={clickHandler} >
-        { woodInstances && <primitive  object={woodInstances} /> }
-        { flagInstances && <primitive  object={flagInstances} /> }
+        {woodInstances.map((woodInstance, index) => {
+          return (
+            <group key={index}>
+              <primitive object={woodInstance} />
+              <primitive object={flagInstances[index]} />
+            </group>
+          )
+        })}
       </group>
     )
 }
