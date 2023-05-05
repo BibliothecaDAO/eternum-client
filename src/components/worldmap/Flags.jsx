@@ -170,7 +170,7 @@ export function Flags (props) {
       setFlagInstances(flagMeshes);
     }, [])
 
-    const clickHandler = (e) => {
+    const clickHandler = (e, index) => {
       e.stopPropagation()
       console.log(e.intersections)
       if ( e.intersections.length > 0 ) {
@@ -184,7 +184,7 @@ export function Flags (props) {
         setCameraTarget(targetPos)
         setCameraPosition(cameraPos)
 
-        console.log(targetPos, cameraPos, instanceId, realmsJson.features[instanceId].xy)
+        console.log(targetPos, cameraPos, instanceId, index, realmsJson.features[instanceId + index * 500].xy)
       }
     }
     
@@ -196,10 +196,10 @@ export function Flags (props) {
         -Math.PI / 2,
         Math.PI,
         0
-      ]} onClick={clickHandler} >
+      ]} >
         {woodInstances.map((woodInstance, index) => {
           return (
-            <group key={index}>
+            <group key={index} onClick={(e) => clickHandler(e, index)}>
               <primitive object={woodInstance} />
               <primitive object={flagInstances[index]} />
             </group>
