@@ -62,7 +62,7 @@ const RealmsPositions = () => {
     }, [])
 
     const realmsMaterial = new THREE.PointsMaterial({
-        size: 0.6,
+        size: 1,
         depthWrite: false,
         vertexColors: true,
     });
@@ -94,7 +94,7 @@ const RealmsPositions = () => {
 
     return <>
         <points onClick={clickHandler} geometry={bufferGeometry} material={realmsMaterial} position={
-            [realmsPosition.x, realmsPosition.y, realmsPosition.z]} rotation={[-Math.PI / 2, 0, 0]}
+            [realmsPosition.x, realmsPosition.y, realmsPosition.z]} rotation={[-Math.PI / 2, Math.PI, 0]}
             scale={[
                 realmsScale,
                 realmsScale,

@@ -6,6 +6,7 @@ import useUIStore from '../../hooks/store/useUIStore';
 import { useSpring, animated } from '@react-spring/three'
 import gsap from 'gsap';
 import { useFrame, useThree } from '@react-three/fiber';
+import { useControls } from 'leva';
 
 const count = realmsJson.features.length;
 
@@ -19,6 +20,19 @@ export function Flags (props) {
 
     const [woodInstances, setWoodInstances] = useState(null);
     const [flagInstances, setFlagInstances] = useState(null);
+
+    const { flagsPosition, flagsScale } = useControls({
+      flagsPosition:
+      {
+          value: { x: -0.38, z: 0, y: -0.17 },
+          step: 0.01
+      },
+      flagsScale:
+      {
+          value: 1,
+          step: 0.01
+      }
+  })
 
     let scale = new THREE.Vector3();
     const tempObject = new THREE.Object3D();
@@ -84,7 +98,7 @@ export function Flags (props) {
       flagMaterial = materials.flag
   
       const defaultTransform = new THREE.Matrix4()
-            .makeRotationX( Math.PI / 2 )
+            .makeRotationX( -Math.PI / 2 )
             .multiply( new THREE.Matrix4().makeScale( 0.3, 0.3, 0.3 ) );
   
       woodGeometry.applyMatrix4( defaultTransform );
@@ -100,7 +114,7 @@ export function Flags (props) {
       for ( let i = 0; i < count; i ++ ) {
         const x = realmsJson.features[i].xy[0];
         const y = realmsJson.features[i].xy[1];
-        const z = 1
+        const z = -0.7
         const _position = new THREE.Vector3( x, y, z );
         const dummy = new THREE.Object3D();
         dummy.position.copy( _position );
@@ -138,9 +152,11 @@ export function Flags (props) {
     
     return (
       <group {...props} dispose={null}
+      position={[flagsPosition.x, flagsPosition.y, flagsPosition.z]}
+      scale={[flagsScale, flagsScale, flagsScale]}
       rotation={[
         -Math.PI / 2,
-        0,
+        Math.PI,
         0
       ]} onClick={clickHandler} >
         { woodInstances && <primitive  object={woodInstances} /> }

@@ -84,10 +84,10 @@ export const MainScene = () => {
             }
         >
             <Perf position="top-left" />
-            {/* <Sky azimuth={1} inclination={0.6} distance={1000} /> */}
+            <Sky azimuth={1} inclination={0.6} distance={1000} />
             <ambientLight />
             <Camera />
-            <pointLight position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
+            <directionalLight position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
             <Suspense fallback={null}>
                 {
                     transition(({ opacity, ...props }, location) => (
@@ -115,6 +115,7 @@ export const MainScene = () => {
                     blendFunction={BlendFunction.SOFT_LIGHT}
                     opacity={0.3}
                 />
+                <Bloom />
             </EffectComposer>
             <AdaptiveDpr />
             <AdaptiveEvents />
