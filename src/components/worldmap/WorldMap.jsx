@@ -38,6 +38,7 @@ const WaterModel = () => {
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/world_map_13-transformed.glb')
   const { nodes: nodes2, materials: materials2 } = useGLTF('/models/world_map_8-transformed.glb')
+  const worldMapRef = useRef()
   const { worldmapPosition, worldmapScale, metalness, roughness } = useControls({
       worldmapPosition:
       {
@@ -101,13 +102,15 @@ export function Model(props) {
       geometryColors[i + 2] = color.b;
     }
     targetGeometry.setAttribute( 'color', new THREE.BufferAttribute( geometryColors, 3 ) );
+    worldMapRef.current.updateMatrix();
+    console.log('matrix', worldMapRef.current)
   }, [])
 
   return (<>      
     <group {...props} dispose={null}>
-      {/* <WaterModel /> */}
+      <WaterModel />
       <mesh geometry={nodes2.ocean.geometry} material={materials2.Ocean} position={[0,-0.01,0]}  scale={[worldmapScale, worldmapScale, worldmapScale]} />
-      <mesh geometry={nodes.continents.geometry} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
+      <mesh ref={worldMapRef} matrixAutoUpdate={false} geometry={nodes.continents.geometry} scale={[worldmapScale, worldmapScale, worldmapScale]} position={[worldmapPosition.x, worldmapPosition.y, worldmapPosition.z]}>
         <meshStandardMaterial flatShading vertexColors metalness={metalness} roughness={roughness}>
         </meshStandardMaterial>
       </mesh>
