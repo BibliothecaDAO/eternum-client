@@ -74,6 +74,7 @@ export const MainScene = () => {
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
             camera={{ fov: 15, position: [0, 700, 0] }}
             dpr={[1, 2]}
+            frameloop='demand'
             gl={
                 {
                     powerPreference: "high-performance",
@@ -84,7 +85,7 @@ export const MainScene = () => {
                 }
             }
         >
-            <Perf position="top-left" />
+            {/* <Perf position="top-left" /> */}
             <Sky azimuth={1} inclination={0.6} distance={1000} />
             <ambientLight />
             <Camera />

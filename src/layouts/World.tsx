@@ -6,6 +6,9 @@ import { TopNavigation } from "../containers/navigation/TopNavigation";
 import { MainScene } from "../modules/scenes/MainScene";
 import useUIStore, { Background } from "../hooks/store/useUIStore";
 import ActiveLink from "../elements/ActiveLink";
+import { Leva } from "leva";
+import { BottomRightContainer } from "../containers/BottomRightContainer";
+import ChatModule from "../modules/ChatModule";
 
 
 export const World = () => {
@@ -23,7 +26,7 @@ export const World = () => {
   const backgroundOptions: Background[] = ['map', 'bastion', 'realmView'];
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen">
+    <div className="fixed top-0 left-0 z-0 w-screen h-screen">
       <LeftPopNavigation>
         {backgroundOptions.map((option) => (
           <ActiveLink
@@ -38,6 +41,11 @@ export const World = () => {
       <BackgroundContainer>
         <MainScene />
       </BackgroundContainer>
+      <BottomRightContainer>
+        <ChatModule />
+      </BottomRightContainer>
+      <Leva hidden />
+      <div className="fixed z-10 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
     </div>
   );
 };
