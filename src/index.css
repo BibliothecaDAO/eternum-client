@@ -7,6 +7,7 @@
 html, body {
     overflow: hidden;
     font-family: 'Aleo', serif;
+    touch-action: none;
 }
 
 .container-bg-gradient {
@@ -17,5 +18,5 @@ html, body {
     background: url('/images/flower-pattern.png');
     mix-blend-mode: multiply;
     background-repeat: repeat;
-    opacity: 0.3;
+    opacity: 0.6;
 }

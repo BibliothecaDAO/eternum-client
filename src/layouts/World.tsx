@@ -13,6 +13,8 @@ import TopRightContainer from "../containers/TopRightContainer";
 import NetworkModule from "../modules/NetworkModule";
 import BottomMiddleContainer from "../containers/BottomMiddleContainer";
 import WolrdMapLayersModule from "../modules/WorldMapLayersModule";
+import TopLeftContainer from "../containers/TopLeftContainer";
+import ContextsModule from "../modules/ContextsModule";
 
 
 export const World = () => {
@@ -45,6 +47,9 @@ export const World = () => {
       <BackgroundContainer>
         <MainScene />
       </BackgroundContainer>
+      <TopLeftContainer>
+        <ContextsModule />
+      </TopLeftContainer>
       <TopRightContainer>
         <NetworkModule />
       </TopRightContainer>
