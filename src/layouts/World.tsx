@@ -9,6 +9,8 @@ import ActiveLink from "../elements/ActiveLink";
 import { Leva } from "leva";
 import { BottomRightContainer } from "../containers/BottomRightContainer";
 import ChatModule from "../modules/ChatModule";
+import TopRightContainer from "../containers/TopRightContainer";
+import NetworkModule from "../modules/NetworkModule";
 
 
 export const World = () => {
@@ -41,6 +43,9 @@ export const World = () => {
       <BackgroundContainer>
         <MainScene />
       </BackgroundContainer>
+      <TopRightContainer>
+        <NetworkModule />
+      </TopRightContainer>
       <BottomRightContainer>
         <ChatModule />
       </BottomRightContainer>
