@@ -11,6 +11,8 @@ import { BottomRightContainer } from "../containers/BottomRightContainer";
 import ChatModule from "../modules/ChatModule";
 import TopRightContainer from "../containers/TopRightContainer";
 import NetworkModule from "../modules/NetworkModule";
+import BottomMiddleContainer from "../containers/BottomMiddleContainer";
+import WolrdMapLayersModule from "../modules/WorldMapLayersModule";
 
 
 export const World = () => {
@@ -46,6 +48,9 @@ export const World = () => {
       <TopRightContainer>
         <NetworkModule />
       </TopRightContainer>
+      <BottomMiddleContainer>
+        <WolrdMapLayersModule />
+      </BottomMiddleContainer>
       <BottomRightContainer>
         <ChatModule />
       </BottomRightContainer>
