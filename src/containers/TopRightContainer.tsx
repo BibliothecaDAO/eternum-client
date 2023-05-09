@@ -6,7 +6,7 @@ interface TopRightContainerProps {
 
 export const TopRightContainer = ({ children }: TopRightContainerProps) => {
     return (
-        <div className="absolute w-1/3 h-56 top-6 right-6">
+        <div className="absolute top-0 right-0 z-10 w-1/3 h-56">
             {children}
         </div>
     );

@@ -50,7 +50,7 @@ export const World = () => {
         <ChatModule />
       </BottomRightContainer>
       <Leva hidden />
-      <div className="fixed z-10 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
+      <div className="fixed z-0 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
     </div>
   );
 };

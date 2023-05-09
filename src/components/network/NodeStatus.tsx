@@ -2,7 +2,7 @@ import { BaseContainer } from "../../containers/BaseContainer"
 
 const NodeStatus = () => {
     return (
-        <BaseContainer className="w-3/5 mt-1 ml-auto">
+        <BaseContainer className="w-3/5 mt-1 ml-auto border-r-0 rounded-r-none">
             <div className="flex justify-between text-xs text-white/70">
                 <div className="uppercase">
                     dojo-node-wed.xyz
