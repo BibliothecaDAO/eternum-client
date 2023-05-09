@@ -14,6 +14,10 @@ html, body {
     background: linear-gradient(180deg, #48352F 3.09%, rgba(72, 53, 47, 0.6) 100%);
 }
 
+.container-bg-gradient-secondary {
+    background: linear-gradient(180deg, #B0B8AE 3.09%, rgba(72, 53, 47, 0.6) 100%);
+}
+
 .flower-pattern {
     background: url('/images/flower-pattern.png');
     mix-blend-mode: multiply;

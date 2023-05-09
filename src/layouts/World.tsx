@@ -17,6 +17,8 @@ import TopLeftContainer from "../containers/TopLeftContainer";
 import ContextsModule from "../modules/ContextsModule";
 import BottomLeftContainer from "../containers/BottomLeftContainer";
 import NavigationModule from "../modules/NavigationModule";
+import ContentContainer from "../containers/ContentContainer";
+import RealmManagementModule from "../modules/RealmManagementModule";
 
 
 export const World = () => {
@@ -35,7 +37,7 @@ export const World = () => {
 
   return (
     <div className="fixed top-0 left-0 z-0 w-screen h-screen">
-      <LeftPopNavigation>
+      {/* <LeftPopNavigation>
         {backgroundOptions.map((option) => (
           <ActiveLink
             key={option}
@@ -45,7 +47,7 @@ export const World = () => {
             {backgroundLabels[option]}
           </ActiveLink>
         ))}
-      </LeftPopNavigation>
+      </LeftPopNavigation> */}
       <BackgroundContainer>
         <MainScene />
       </BackgroundContainer>
@@ -55,6 +57,9 @@ export const World = () => {
       <TopRightContainer>
         <NetworkModule />
       </TopRightContainer>
+      <ContentContainer>
+        <RealmManagementModule />
+      </ContentContainer>
       <BottomLeftContainer>
         <NavigationModule />
       </BottomLeftContainer>
