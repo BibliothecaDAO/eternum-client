@@ -1,75 +1,76 @@
 import { Background as BackgroundContainer } from "../containers/Background";
-import { BottomNavigation as BottomNavigationContainer } from "../containers/BottomNavigation";
-import { LeftPopNavigation } from "../containers/LeftPopNavigation";
-import { RightPopNavigation } from "../containers/RightPopNavigation";
-import { TopNavigation as TopNavigationContainer } from "../containers/TopNavigation";
-import { Map } from "../modules/Map";
-import { RealmDetails } from "../modules/RealmDetails";
-import useUIStore, { Background } from "../hooks/useUIStore";
-import { Realm } from "../components/Realm";
-import { RealmView } from "../modules/Realm";
-import { Combat } from "../modules/Combat";
-import { Bastion } from "../modules/Bastion";
+import { BottomNavigation as BottomNavigationContainer } from "../containers/navigation/BottomNavigation";
+import { LeftPopNavigation } from "../containers/navigation/LeftPopNavigation";
+import { RightPopNavigation } from "../containers/navigation/RightPopNavigation";
+import { TopNavigation } from "../containers/navigation/TopNavigation";
+import { MainScene } from "../modules/scenes/MainScene";
+import useUIStore, { Background } from "../hooks/store/useUIStore";
+import ActiveLink from "../elements/ActiveLink";
+import { Leva } from "leva";
+import { BottomRightContainer } from "../containers/BottomRightContainer";
+import ChatModule from "../modules/ChatModule";
+import TopRightContainer from "../containers/TopRightContainer";
+import NetworkModule from "../modules/NetworkModule";
+import BottomMiddleContainer from "../containers/BottomMiddleContainer";
+import WolrdMapLayersModule from "../modules/WorldMapLayersModule";
+import TopLeftContainer from "../containers/TopLeftContainer";
+import ContextsModule from "../modules/ContextsModule";
+import BottomLeftContainer from "../containers/BottomLeftContainer";
+import NavigationModule from "../modules/NavigationModule";
+import ContentContainer from "../containers/ContentContainer";
+import RealmManagementModule from "../modules/RealmManagementModule";
 
 
 export const World = () => {
 
-  const sidebarOpen = useUIStore((state) => state.sidebarOpen);
-  const activeBackground = useUIStore((state) => state.activeBackground);
-  const setActiveBackground = useUIStore((state) => state.setActiveBackground);
+  const activeScene = useUIStore((state) => state.activeScene);
+  const setActiveScene = useUIStore((state) => state.setActiveScene);
 
-  const renderActiveBackground = (): JSX.Element | null => {
-    switch (activeBackground) {
-      case 'map':
-        return <Map />;
-      case 'realmView':
-        return <RealmView />;
-      case 'combat':
-        return <Combat />;
-      case 'bastion':
-        return <Bastion />;
-      default:
-        return null;
-    }
+  const backgroundLabels: Record<Background, string> = {
+    map: 'Map',
+    realmView: 'Realm View',
+    combat: 'Combat',
+    bastion: 'Bastion',
   };
 
-  const backgroundOptions: Background[] = ['map', 'realmView', 'combat', 'bastion'];
+  const backgroundOptions: Background[] = ['map', 'bastion', 'realmView'];
 
   return (
-    <div className="absolute top-0 z-20 w-screen h-screen z-100">
-      {/* Left nav */}
-      <LeftPopNavigation>
-        <div>
-          {backgroundOptions.map((option) => (
-            <button
-              key={option}
-              className={`px-2 ${activeBackground === option ? 'active' : ''}`}
-              onClick={() => setActiveBackground(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-
-      </LeftPopNavigation>
-
-      {/* Right nav */}
-      <RightPopNavigation>
-
-      </RightPopNavigation>
-      {/* Top nav */}
-      {/* <TopNavigationContainer>
-
-      </TopNavigationContainer> */}
-
-      {/* Bottom nav */}
-      <BottomNavigationContainer>
-        {/* <RealmDetails /> */}
-      </BottomNavigationContainer>
-
+    <div className="fixed top-0 left-0 z-0 w-screen h-screen">
+      {/* <LeftPopNavigation>
+        {backgroundOptions.map((option) => (
+          <ActiveLink
+            key={option}
+            className={`px-2`}
+            href={"/" + option}
+          >
+            {backgroundLabels[option]}
+          </ActiveLink>
+        ))}
+      </LeftPopNavigation> */}
       <BackgroundContainer>
-        {renderActiveBackground()}
+        <MainScene />
       </BackgroundContainer>
+      <TopLeftContainer>
+        <ContextsModule />
+      </TopLeftContainer>
+      <TopRightContainer>
+        <NetworkModule />
+      </TopRightContainer>
+      <ContentContainer>
+        <RealmManagementModule />
+      </ContentContainer>
+      <BottomLeftContainer>
+        <NavigationModule />
+      </BottomLeftContainer>
+      <BottomMiddleContainer>
+        <WolrdMapLayersModule />
+      </BottomMiddleContainer>
+      <BottomRightContainer>
+        <ChatModule />
+      </BottomRightContainer>
+      <Leva hidden />
+      <div className="fixed z-0 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
     </div>
   );
 };

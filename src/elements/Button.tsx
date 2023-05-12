@@ -14,18 +14,17 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const baseStyle =
-    "inline-flex items-center justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm";
+    "h-8 inline-flex transition-all duration-300 items-center justify-center p-3 text-xs font-medium text-white/90 border border-transparent rounded-lg shadow-sm";
   const enabledStyle =
-    "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500";
+    "bg-black/30 hover:bg-black/70 focus:outline-none";
   const disabledStyle = "bg-gray-300 cursor-not-allowed";
 
   return (
     <button
       type="button"
       onClick={disabled ? undefined : onClick}
-      className={`${baseStyle} ${
-        disabled ? disabledStyle : enabledStyle
-      } ${className}`}
+      className={`${baseStyle} ${disabled ? disabledStyle : enabledStyle
+        } ${className}`}
       disabled={disabled}
     >
       {children}
