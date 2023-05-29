@@ -5,10 +5,6 @@ export type Background = 'map' | 'realmView' | 'combat' | 'bastion';
 interface UIStore {
     theme: string;
     setTheme: (theme: string) => void;
-    sidebarOpen: boolean;
-    toggleSidebar: () => void;
-    activeScene: Background;
-    setActiveScene: (background: Background) => void;
     cameraPosition: any,
     setCameraPosition: (position: any) => void,
     cameraTarget: any,
@@ -20,10 +16,6 @@ interface UIStore {
 const useUIStore = create<UIStore & PopupsStore>((set) => ({
     theme: 'light',
     setTheme: (theme) => set({ theme }),
-    sidebarOpen: false,
-    toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
-    activeScene: 'map',
-    setActiveScene: (scene) => set({ activeScene: scene }),
     cameraPosition: { x: 0, y: 700, z: 0 },
     setCameraPosition: (position) => set({ cameraPosition: position }),
     cameraTarget: { x: 0, y: 0, z: 0 },

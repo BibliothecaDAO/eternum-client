@@ -1,10 +1,6 @@
 import { Background as BackgroundContainer } from "../containers/Background";
-import { BottomNavigation as BottomNavigationContainer } from "../containers/navigation/BottomNavigation";
-import { LeftPopNavigation } from "../containers/navigation/LeftPopNavigation";
-import { RightPopNavigation } from "../containers/navigation/RightPopNavigation";
-import { TopNavigation } from "../containers/navigation/TopNavigation";
 import { MainScene } from "../modules/scenes/MainScene";
-import useUIStore, { Background } from "../hooks/store/useUIStore";
+import { Background } from "../hooks/store/useUIStore";
 import ActiveLink from "../elements/ActiveLink";
 import { Leva } from "leva";
 import { BottomRightContainer } from "../containers/BottomRightContainer";
@@ -22,9 +18,6 @@ import RealmManagementModule from "../modules/RealmManagementModule";
 
 
 export const World = () => {
-
-  const activeScene = useUIStore((state) => state.activeScene);
-  const setActiveScene = useUIStore((state) => state.setActiveScene);
 
   const backgroundLabels: Record<Background, string> = {
     map: 'Map',
