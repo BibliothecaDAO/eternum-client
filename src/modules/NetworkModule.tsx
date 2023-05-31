@@ -4,8 +4,7 @@ import NodeStatus from "../components/network/NodeStatus"
 const NetworkModule = () => {
     return (
         <>
-            <EpochCountdown />
-            <NodeStatus />
+            {/* <NodeStatus /> */}
         </>
     )
 }

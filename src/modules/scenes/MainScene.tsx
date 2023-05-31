@@ -8,8 +8,8 @@ import useUIStore from "../../hooks/store/useUIStore";
 import { useLocation, Switch, Route } from "wouter"
 import { useTransition } from "@react-spring/core"
 import { a } from "@react-spring/three"
-import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls, AdaptiveDpr, AdaptiveEvents } from '@react-three/drei'
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Sky, Environment, Lightformer, useHelper, PerspectiveCamera, MapControls, CameraShake, AdaptiveDpr, AdaptiveEvents } from '@react-three/drei'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { EffectComposer, DepthOfField, Bloom, Noise, Vignette, Outline, EffectComposerContext, SMAA, Sepia } from '@react-three/postprocessing'
 import { Sobel } from '../../utils/effects.jsx'
 import { useControls, button } from 'leva';
@@ -17,6 +17,7 @@ import * as THREE from 'three'
 import realmsJson from '../../geodata/realms.json';
 import { CameraControls } from '../../utils/Camera';
 import { BlendFunction } from 'postprocessing'
+import { SoftShadows } from "@react-three/drei"
 
 export const Camera = () => {
     const cameraPosition = useUIStore((state) => state.cameraPosition);
@@ -47,7 +48,6 @@ export const Camera = () => {
     </>
 }
 export const MainScene = () => {
-    const activeScene = useUIStore((state) => state.activeScene);
 
     const {
         lightPosition
@@ -69,12 +69,23 @@ export const MainScene = () => {
         config: () => (n) => n === "opacity" && { friction: 60 },
     })
 
+    const shakeConfig = useMemo(() => ({
+        maxYaw: 0.01, // Max amount camera can yaw in either direction
+        maxPitch: 0, // Max amount camera can pitch in either direction
+        maxRoll: 0, // Max amount camera can roll in either direction
+        yawFrequency: 0.04, // Frequency of the the yaw rotation
+        pitchFrequency: 0, // Frequency of the pitch rotation
+        rollFrequency: 0, // Frequency of the roll rotation
+        intensity: 1, // initial intensity of the shake
+        controls: undefined, // if using orbit controls, pass a ref here so we can update the rotation
+    }), [])
+
     return (
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
+            className='rounded-xl'
             camera={{ fov: 15, position: [0, 700, 0] }}
             dpr={[1, 2]}
-            frameloop='demand'
             gl={
                 {
                     powerPreference: "high-performance",
@@ -86,10 +97,11 @@ export const MainScene = () => {
             }
         >
             {/* <Perf position="top-left" /> */}
-            <Sky azimuth={1} inclination={0.6} distance={1000} />
+            <Sky azimuth={0.1} inclination={0.6} distance={1000} />
             <ambientLight />
             <Camera />
-            <directionalLight position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
+            <directionalLight castShadow position={[lightPosition.x, lightPosition.y, lightPosition.z]} />
+            <CameraShake {...shakeConfig} />
             <Suspense fallback={null}>
                 {
                     transition(({ opacity, ...props }, location) => (
@@ -111,7 +123,6 @@ export const MainScene = () => {
             </Suspense>
             <EffectComposer multisampling={0}>
                 <SMAA />
-                <Vignette eskil={false} offset={0.1} darkness={0.8} />
                 <Noise
                     premultiply
                     blendFunction={BlendFunction.SOFT_LIGHT}
@@ -120,7 +131,7 @@ export const MainScene = () => {
             </EffectComposer>
             <AdaptiveDpr />
             <AdaptiveEvents />
-            <fog attach="fog" color="skyblue" near={700} far={950} />
+            {/* <fog attach="fog" color="skyblue" near={250} far={350} /> */}
         </Canvas>
     )
 }

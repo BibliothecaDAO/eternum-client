@@ -1,10 +1,8 @@
-import { Model } from '../../components/cityview/CityView.jsx'
+import { Model } from '../../components/cityview/CityView'
 
 export const RealmCityViewScene = () => {
     return (
         <>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
             <Model />
         </>
     )

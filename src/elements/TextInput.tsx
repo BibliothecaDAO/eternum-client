@@ -15,7 +15,7 @@ const TextInput = (props: TextInputProps) => {
     return (
         <input
             className={clsx(
-                "w-full p-2 h-8 bg-transparent transition-all duration-300 focus:outline-none focus:border-opacity-50 text-white/70 text-xs flex-grow rounded-lg border-2 border-white border-opacity-20",
+                "w-full p-2 h-8 bg-transparent transition-all duration-300 focus:outline-none focus:border-opacity-50 text-white placeholder-white/25 text-xs flex-grow rounded-lg",
                 className
             )}
             type="text"

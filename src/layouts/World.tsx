@@ -15,6 +15,7 @@ import BottomLeftContainer from "../containers/BottomLeftContainer";
 import NavigationModule from "../modules/NavigationModule";
 import ContentContainer from "../containers/ContentContainer";
 import RealmManagementModule from "../modules/RealmManagementModule";
+import EpochCountdown from "../components/network/EpochCountdown";
 
 
 export const World = () => {
@@ -29,7 +30,7 @@ export const World = () => {
   const backgroundOptions: Background[] = ['map', 'bastion', 'realmView'];
 
   return (
-    <div className="fixed top-0 left-0 z-0 w-screen h-screen">
+    <div className="fixed top-0 left-0 z-0 w-screen h-screen p-2">
       {/* <LeftPopNavigation>
         {backgroundOptions.map((option) => (
           <ActiveLink
@@ -41,11 +42,14 @@ export const World = () => {
           </ActiveLink>
         ))}
       </LeftPopNavigation> */}
-      <BackgroundContainer>
+      <BackgroundContainer className="border-2 border-[#E0AF65] rounded-xl relative">
+        <div className="absolute top-0 left-0 z-10 w-full pointer-events-none rounded-xl h-44 bg-gradient-to-b from-black to-transparent opacity-90" />
         <MainScene />
+        <div className="absolute bottom-0 left-0 z-10 w-full pointer-events-none rounded-xl h-44 bg-gradient-to-t from-black to-transparent opacity-90" />
       </BackgroundContainer>
       <TopLeftContainer>
-        <ContextsModule />
+        <img src="/images/eternum_logo.png" className="mt-2 ml-24 w-44" />
+        {/* <ContextsModule /> */}
       </TopLeftContainer>
       <TopRightContainer>
         <NetworkModule />
@@ -62,8 +66,8 @@ export const World = () => {
       <BottomRightContainer>
         <ChatModule />
       </BottomRightContainer>
+      <EpochCountdown />
       <Leva hidden />
-      <div className="fixed z-0 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
     </div>
   );
 };
