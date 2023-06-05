@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Tabs } from '../../../elements/tab';
+import { CaravansPanel } from './caravans/CaravansPanel';
 
 type RealmTradeComponentProps = {}
 
@@ -31,7 +32,7 @@ export const RealmTradeComponent = ({ }: RealmTradeComponentProps) => {
                         <div>Caravans</div>
                     </div>
                 ),
-                component: <div />,
+                component: <CaravansPanel />,
             },
             {
                 label: (
@@ -51,6 +52,7 @@ export const RealmTradeComponent = ({ }: RealmTradeComponentProps) => {
                 selectedIndex={selectedTab}
                 onChange={(index) => setSelectedTab(index as number)}
                 variant="default"
+                className='h-full'
             >
                 <Tabs.List>
                     {tabs.map((tab, index) => (

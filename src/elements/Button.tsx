@@ -5,25 +5,31 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  variant: "primary" | "secondary" | "success" | "danger";
 }
 
+const STYLES = {
+  baseStyle: "h-8 inline-flex transition-all duration-300 items-center justify-center p-3 text-xs font-medium rounded-lg",
+  default:
+    "text-white/90 border border-transparent shadow-sm",
+  enabledStyle:
+    "bg-black/10 hover:bg-black/30 focus:outline-none",
+  disabledStyle: "bg-gray-300 cursor-not-allowed",
+  success: "border border-brilliance !text-brilliance bg-transparent hover:bg-brilliance/10",
+}
 const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
   className = "",
   disabled = false,
+  variant = "default",
 }) => {
-  const baseStyle =
-    "h-8 inline-flex transition-all duration-300 items-center justify-center p-3 text-xs font-medium text-white/90 border border-transparent rounded-lg shadow-sm";
-  const enabledStyle =
-    "bg-black/10 hover:bg-black/30 focus:outline-none";
-  const disabledStyle = "bg-gray-300 cursor-not-allowed";
 
   return (
     <button
       type="button"
       onClick={disabled ? undefined : onClick}
-      className={`${baseStyle} ${disabled ? disabledStyle : enabledStyle
+      className={`${STYLES.baseStyle} ${STYLES[variant]} ${disabled ? STYLES.disabledStyle : STYLES.enabledStyle
         } ${className}`}
       disabled={disabled}
     >

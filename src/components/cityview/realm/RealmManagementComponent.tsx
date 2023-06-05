@@ -55,12 +55,12 @@ const RealmManagementComponent = () => {
     );
     return (
         <div className="flex w-full mt-0.5 relative">
-            <BaseContainer className="w-full min-h-[400px] overflow-visible border-gold">
+            <BaseContainer className="w-full h-[400px] overflow-visible border-gold">
                 <Tabs
                     selectedIndex={selectedTab}
                     onChange={(index) => setSelectedTab(index as number)}
                     variant="primary"
-                    className="-m-2"
+                    className="flex-1 -m-2"
                 >
                     <Tabs.List>
                         {tabs.map((tab, index) => (
