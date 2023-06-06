@@ -11,7 +11,7 @@ export const SortPanel = ({ children, className }: SortPanelProps) => {
     useEffect(() => { }, []);
 
     return (
-        <div className={clsx('flex flex-wrap border-b border-gold', className)}>
+        <div className={clsx('flex flex-wrap border-b border-gray-gold', className)}>
             {children}
         </div>
     );

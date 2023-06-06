@@ -23,9 +23,20 @@ export const SortButton = ({ label, activeSort, sortKey, onChange, className, ..
     const isActive = activeSort.sortKey == sortKey;
     const sort = isActive ? activeSort.sort : 'none';
 
+    const nextSort = (sort: 'asc' | 'desc' | 'none') => {
+        switch (sort) {
+            case 'asc':
+                return 'desc';
+            case 'desc':
+                return 'none';
+            case 'none':
+                return 'asc';
+        }
+    }
+
     return (
         <button className={clsx(isActive && sort !== 'none' ? 'text-white' : 'text-gold', 'flex items-center cursor-pointer text-xxs', className)} {...props}>
-            <div onClick={() => onChange(sortKey, 'none')}>{label}</div>
+            <div onClick={() => onChange(sortKey, nextSort(sort))}>{label}</div>
             <div className='flex flex-col items-center justify-center ml-1'>
                 <CaretUp onClick={() => onChange(sortKey, sort !== 'asc' ? 'asc' : 'none')} className={clsx(sort == 'asc' ? 'stroke-white' : 'stroke-gold/50')} />
                 <CaretDown onClick={() => onChange(sortKey, sort !== 'desc' ? 'desc' : 'none')} className={clsx(sort == 'desc' ? 'stroke-white' : 'stroke-gold/50')} />
