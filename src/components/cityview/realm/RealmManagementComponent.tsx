@@ -10,7 +10,7 @@ import RealmTradeComponent from "./RealmTradeComponent";
 
 
 const RealmManagementComponent = () => {
-    const [selectedTab, setSelectedTab] = useState(0);
+    const [selectedTab, setSelectedTab] = useState(1);
 
     const tabs = useMemo(
         () => [

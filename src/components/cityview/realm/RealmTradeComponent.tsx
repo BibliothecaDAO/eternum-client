@@ -6,7 +6,7 @@ type RealmTradeComponentProps = {}
 
 export const RealmTradeComponent = ({ }: RealmTradeComponentProps) => {
 
-    const [selectedTab, setSelectedTab] = useState(0);
+    const [selectedTab, setSelectedTab] = useState(2);
 
     const tabs = useMemo(
         () => [

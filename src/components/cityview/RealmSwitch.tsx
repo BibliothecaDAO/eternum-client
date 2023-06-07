@@ -4,6 +4,7 @@ import CircleButton from '../../elements/CircleButton';
 import { OrderIcon } from '../../elements/OrderIcon';
 import { Badge } from '../../elements/Badge';
 import { RealmBadge } from '../../elements/RealmBadge';
+import { Link } from 'wouter';
 
 type RealmSwitchProps = {
 
@@ -59,7 +60,9 @@ export const RealmSwitch = ({ className }: RealmSwitchProps) => {
                 showRealms ? 'max-w-[500px]' : 'max-w-0')
             }>
                 {dummyRealms.map((realm, index) => (
-                    <RealmBadge key={realm.id} realm={realm} active={selectedRealm === index} onClick={() => setSelectedRealm(index)} />
+                    <Link href='/realmView'>
+                        <RealmBadge key={realm.id} realm={realm} active={selectedRealm === index} onClick={() => setSelectedRealm(index)} />
+                    </Link>
                 ))}
             </div>
             {!showRealms && <Badge size="lg" className='absolute top-0 right-0 translate-x-1 -translate-y-2 text-xxs text-brown'>
