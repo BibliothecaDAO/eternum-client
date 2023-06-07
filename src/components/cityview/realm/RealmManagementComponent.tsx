@@ -36,23 +36,29 @@ const RealmManagementComponent = () => {
         [selectedTab]
     );
     return (
-        <Tabs
-            selectedIndex={selectedTab}
-            onChange={(index) => setSelectedTab(index as number)}
-            variant="primary"
-            className="flex-1 mt-3"
-        >
-            <Tabs.List>
-                {tabs.map((tab, index) => (
-                    <Tabs.Tab key={index}>{tab.label}</Tabs.Tab>
-                ))}
-            </Tabs.List>
-            <Tabs.Panels>
-                {tabs.map((tab, index) => (
-                    <Tabs.Panel key={index}>{tab.component}</Tabs.Panel>
-                ))}
-            </Tabs.Panels>
-        </Tabs>
+        <>
+            <Tabs
+                selectedIndex={selectedTab}
+                onChange={(index) => setSelectedTab(index as number)}
+                variant="primary"
+                className="flex-1 mt-4"
+            >
+                <Tabs.List>
+                    {tabs.map((tab, index) => (
+                        <Tabs.Tab key={index}>{tab.label}</Tabs.Tab>
+                    ))}
+                </Tabs.List>
+                <Tabs.Panels>
+                    {tabs.map((tab, index) => (
+                        <Tabs.Panel key={index}>{tab.component}</Tabs.Panel>
+                    ))}
+                </Tabs.Panels>
+            </Tabs>
+            <button className="absolute hover:bg-gold/20 transition-bg duration-200 z-10 px-2 py-1 ml-auto text-xs border rounded-full right-3 top-[4.5rem] text-gold border-gold">
+                Show on map
+            </button>
+        </>
+
     )
 }
 

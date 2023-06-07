@@ -20,6 +20,7 @@ export default {
         'gray-gold': '#776756',
         gray: '#1B1B1B',
         brown: '#24130A',
+        'light-red': '#EF5858',
         order: {
           power: '#F4B547',
           giants: '#EB544D',
