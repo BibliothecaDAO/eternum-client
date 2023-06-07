@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { createContext } from 'react';
-import type { VARIANTS } from './tabs';
+import type { VARIANTS } from './Tabs';
 
 interface TabContextType {
   variant: keyof typeof VARIANTS;

@@ -2,8 +2,8 @@ import { Tab } from '@headlessui/react';
 import clsx from 'clsx';
 import type { ComponentProps } from 'react';
 import { useContext } from 'react';
-import { TabContext } from './tab-provider';
-import { VARIANTS } from './tabs';
+import { TabContext } from './TabProvider';
+import { VARIANTS } from './Tabs';
 
 type TabListProps = ComponentProps<'div'>;
 

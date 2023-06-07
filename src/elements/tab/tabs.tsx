@@ -1,11 +1,11 @@
 import { Tab as HeadlessTab } from '@headlessui/react';
 import clsx from 'clsx';
 import type { ReactNode, SyntheticEvent } from 'react';
-import { Tab } from './tab';
-import { TabList } from './tab-list';
-import { TabPanel } from './tab-panel';
-import { TabPanels } from './tab-panels';
-import { TabProvider } from './tab-provider';
+import { Tab } from './Tab';
+import { TabList } from './TabList';
+import { TabPanel } from './TabPanel';
+import { TabPanels } from './TabPanels';
+import { TabProvider } from './TabProvider';
 
 export const VARIANTS = {
   default: {
@@ -18,8 +18,8 @@ export const VARIANTS = {
   },
   primary: {
     tab: {
-      base: 'relative z-10 !outline-none transition-all duration-300 text-xs flex-grow p-4',
-      active: 'rounded-t-xl -mt-2 -mb-[1px] border-t border-gold text-gold bg-gradient-to-b from-black to-[#151515]',
+      base: 'relative z-10 !outline-none transition-margin -mb-[1px] duration-300 text-xs flex-grow p-4',
+      active: 'rounded-t-xl -mt-2 border-t border-gold text-gold bg-gradient-to-b from-black to-[#151515]',
       inactive: 'text-gray-gold',
     },
     tabList: 'flex w-full justify-around',

@@ -55,7 +55,7 @@ export const TradeOffer = ({ ...props }: TradeOfferProps) => {
                     <div className='grid w-1/3 grid-cols-3 gap-2 text-gold'>
                         {props.resourcesGet.map(({ resourceId, amount }) => (
                             <div className='flex flex-col items-center'>
-                                <ResourceIcon key={resourceId} resource={findResourceById(resourceId)?.trait as any} size='xs' className='mb-1' />
+                                <ResourceIcon key={resourceId} resource={findResourceById(resourceId)?.trait as any} size='xs' />
                                 {amount}
                             </div>
 

@@ -17,15 +17,6 @@ const RealmManagementComponent = () => {
             {
                 label: (
                     <div className="flex flex-col items-center">
-                        <CrossSwords className="mb-2 fill-current" />
-                        <div>Military</div>
-                    </div>
-                ),
-                component: <div />,
-            },
-            {
-                label: (
-                    <div className="flex flex-col items-center">
                         <PickAxeSecond className="mb-2 fill-current" />{' '}
                         <div>Labor</div>
                     </div>
