@@ -1,14 +1,15 @@
 import RealmInfoComponent from "../components/cityview/realm/RealmInfoComponent"
 import RealmManagementComponent from "../components/cityview/realm/RealmManagementComponent"
 import RealmStatusComponent from "../components/cityview/realm/RealmStatusComponent"
+import { BaseContainer } from "../containers/BaseContainer"
 
 const RealmManagementModule = () => {
     return (
-        <div className="flex flex-col w-full mb-24">
+        <BaseContainer className="h-full">
             <RealmInfoComponent />
             <RealmStatusComponent />
             <RealmManagementComponent />
-        </div>
+        </BaseContainer>
     )
 }
 

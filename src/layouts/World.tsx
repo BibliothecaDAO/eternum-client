@@ -5,13 +5,11 @@ import ActiveLink from "../elements/ActiveLink";
 import { Leva } from "leva";
 import { BottomRightContainer } from "../containers/BottomRightContainer";
 import ChatModule from "../modules/ChatModule";
-import TopRightContainer from "../containers/TopRightContainer";
 import NetworkModule from "../modules/NetworkModule";
 import BottomMiddleContainer from "../containers/BottomMiddleContainer";
 import WolrdMapLayersModule from "../modules/WorldMapLayersModule";
-import TopLeftContainer from "../containers/TopLeftContainer";
+import TopContainer from "../containers/TopContainer";
 import ContextsModule from "../modules/ContextsModule";
-import BottomLeftContainer from "../containers/BottomLeftContainer";
 import NavigationModule from "../modules/NavigationModule";
 import ContentContainer from "../containers/ContentContainer";
 import RealmManagementModule from "../modules/RealmManagementModule";
@@ -47,19 +45,14 @@ export const World = () => {
         <MainScene />
         <div className="absolute bottom-0 left-0 z-10 w-full pointer-events-none rounded-xl h-44 bg-gradient-to-t from-black to-transparent opacity-90" />
       </BackgroundContainer>
-      <TopLeftContainer>
-        <img src="/images/eternum_logo.png" className="mt-2 ml-24 w-44" />
-        {/* <ContextsModule /> */}
-      </TopLeftContainer>
-      <TopRightContainer>
+      <TopContainer>
         <NetworkModule />
-      </TopRightContainer>
+        <NavigationModule />
+        {/* <ContextsModule /> */}
+      </TopContainer>
       <ContentContainer>
         <RealmManagementModule />
       </ContentContainer>
-      <BottomLeftContainer>
-        <NavigationModule />
-      </BottomLeftContainer>
       <BottomMiddleContainer>
         <WolrdMapLayersModule />
       </BottomMiddleContainer>

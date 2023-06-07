@@ -10,7 +10,7 @@ interface BaseContainerProps {
 
 export const BaseContainer = ({ children, className, expandable }: BaseContainerProps) => {
     return (
-        <div className={clsx("p-2 flex shadow-black/30 shadow-md flex-col border-[1px] border-[#776756] border-solid rounded-xl  container-bg-gradient overflow-hidden", className)}>
+        <div className={clsx("p-2 flex shadow-black/30 shadow-md flex-col border border-gold rounded-xl  container-bg-gradient overflow-hidden", className)}>
             {children}
             {expandable && <Expand className="absolute w-4 h-4 transition-colors duration-200 cursor-pointer top-4 right-4 fill-gold hover:fill-white" />}
         </div>

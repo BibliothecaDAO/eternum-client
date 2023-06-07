@@ -19,6 +19,7 @@ export default {
         'anger-light': '#CD8290',
         'gray-gold': '#776756',
         gray: '#1B1B1B',
+        brown: '#24130A',
         order: {
           power: '#F4B547',
           giants: '#EB544D',

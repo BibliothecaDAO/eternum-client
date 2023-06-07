@@ -45,29 +45,23 @@ const RealmManagementComponent = () => {
         [selectedTab]
     );
     return (
-        <div className="flex w-full mt-0.5 relative">
-            <BaseContainer className="w-full h-[400px] overflow-visible border-gold">
-                <Tabs
-                    selectedIndex={selectedTab}
-                    onChange={(index) => setSelectedTab(index as number)}
-                    variant="primary"
-                    className="flex-1 -m-2"
-                >
-                    <Tabs.List>
-                        {tabs.map((tab, index) => (
-                            <Tabs.Tab key={index}>{tab.label}</Tabs.Tab>
-                        ))}
-                    </Tabs.List>
-                    <Tabs.Panels>
-                        {tabs.map((tab, index) => (
-                            <Tabs.Panel key={index}>{tab.component}</Tabs.Panel>
-                        ))}
-                    </Tabs.Panels>
-                </Tabs>
-            </BaseContainer>
-            {/* <SecondaryContainer className="absolute bottom-0 min-w-[300px] min-h-[200px] translate-x-full -right-2">
-            </SecondaryContainer> */}
-        </div >
+        <Tabs
+            selectedIndex={selectedTab}
+            onChange={(index) => setSelectedTab(index as number)}
+            variant="primary"
+            className="flex-1 -m-2"
+        >
+            <Tabs.List>
+                {tabs.map((tab, index) => (
+                    <Tabs.Tab key={index}>{tab.label}</Tabs.Tab>
+                ))}
+            </Tabs.List>
+            <Tabs.Panels>
+                {tabs.map((tab, index) => (
+                    <Tabs.Panel key={index}>{tab.component}</Tabs.Panel>
+                ))}
+            </Tabs.Panels>
+        </Tabs>
     )
 }
 

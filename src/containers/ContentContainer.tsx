@@ -1,6 +1,6 @@
 const ContentContainer = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="absolute w-1/4 translate-y-1/2 left-6 bottom-1/2">
+        <div className="absolute w-1/4 left-6 bottom-10 h-[calc(100vh-12.5rem)]">
             {children}
         </div>
     );
