@@ -4,6 +4,7 @@ import CircleButton from "../elements/CircleButton"
 import { ReactComponent as WorldIcon } from "../assets/icons/common/world.svg"
 import { ReactComponent as ForwardBurgerIcon } from "../assets/icons/common/forward-burger.svg"
 import clsx from "clsx"
+import { RealmSwitch } from "./cityview/RealmSwitch"
 
 const NavgationComponent = () => {
     return (
@@ -20,11 +21,9 @@ const NavgationComponent = () => {
             )}>
                 <ForwardBurgerIcon className="fill-current" />
             </CircleButton>
-            <CircleButton size="md" className={clsx("absolute z-0 text-[10px]",
+            <RealmSwitch className={clsx("absolute z-0 text-[10px]",
                 "top-16 left-16 -ml-2 -mt-2"
-            )}>
-
-            </CircleButton>
+            )} />
         </div>
     )
 }

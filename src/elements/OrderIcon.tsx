@@ -24,6 +24,7 @@ export type Props = {
   className?: string;
   containerClassName?: string;
   withTooltip?: boolean;
+  color?: string;
 };
 
 const Components: { [key: string]: ReactElement } = Object.freeze({
@@ -45,8 +46,46 @@ const Components: { [key: string]: ReactElement } = Object.freeze({
   protection: <Protection />,
 });
 
+const getIcon = (order: string, color: string) => {
+  switch (order) {
+    case 'power':
+      return <Power className={`stroke-8 stroke-${color}`} />;
+    case 'anger':
+      return <Anger className={`fill-${color}`} />;
+    case 'brilliance':
+      return <Brilliance className={`fill-${color}`} />;
+    case 'detection':
+      return <Detection className={`fill-${color}`} />;
+    case 'enlightenment':
+      return <Enlightenment className={`fill-${color}`} />;
+    case 'fox':
+      return <Fox className={`stroke-8 stroke-${color}`} />;
+    case 'fury':
+      return <Fury className={`stroke-8 stroke-${color}`} />;
+    case 'giants':
+      return <Giants className={`fill-${color}`} />;
+    case 'perfection':
+      return <Perfection className={`fill-${color}`} />;
+    case 'reflection':
+      return <Reflection className={`fill-${color}`} />;
+    case 'skill':
+      return <Skill className={`fill-${color}`} />;
+    case 'titans':
+      return <Titans className={`stroke-8 stroke-${color}`} />;
+    case 'twins':
+      return <Twins className={`fill-${color}`} />;
+    case 'vitriol':
+      return <Vitriol className={`stroke-8 stroke-${color}`} />;
+    case 'rage':
+      return <Rage className={`fill-${color}`} />;
+    case 'protection':
+      return <Protection className={`fill-${color}`} />;
+  }
+}
+
 const STYLES = {
   size: {
+    xxs: 'w-2 h-2 flex justify-center paper',
     xs: 'w-4 h-4 flex justify-center paper',
     sm: 'w-6 h-6 flex justify-center paper',
     md: 'w-8 h-8 flex justify-center paper',
@@ -57,10 +96,12 @@ const STYLES = {
 export const OrderIcon = (props: Props) => {
   const order = props.order.toLowerCase();
 
+  const color = props.color ?? `order-${order.replace('the ', '')}`;
+
   return (
     <div className={clsx('relative group', props.containerClassName)}>
       <div className={clsx(STYLES.size[props.size], props.className)}>
-        {Components[order.replace('_', ' ')]}
+        {getIcon(order, color)}
       </div>
       {props.withTooltip && (
         <div className="absolute top-0 flex flex-col items-center hidden -translate-y-full w-max group-hover:flex">
