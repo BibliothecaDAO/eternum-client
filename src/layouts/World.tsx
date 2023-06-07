@@ -14,6 +14,7 @@ import NavigationModule from "../modules/NavigationModule";
 import ContentContainer from "../containers/ContentContainer";
 import RealmManagementModule from "../modules/RealmManagementModule";
 import EpochCountdown from "../components/network/EpochCountdown";
+import RealmStatusComponent from "../components/cityview/realm/RealmStatusComponent";
 
 
 export const World = () => {
@@ -47,7 +48,11 @@ export const World = () => {
       </BackgroundContainer>
       <TopContainer>
         <NetworkModule />
-        <NavigationModule />
+        <div className="flex">
+          <NavigationModule />
+          <RealmStatusComponent className="ml-20 -mt-1" />
+        </div>
+
         {/* <ContextsModule /> */}
       </TopContainer>
       <ContentContainer>
