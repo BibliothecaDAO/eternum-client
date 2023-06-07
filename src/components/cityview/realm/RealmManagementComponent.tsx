@@ -16,8 +16,8 @@ const RealmManagementComponent = () => {
         () => [
             {
                 label: (
-                    <div className="flex flex-col items-center">
-                        <PickAxeSecond className="mb-2 fill-current" />{' '}
+                    <div className="flex items-center">
+                        <PickAxeSecond className="mr-2 fill-current" />{' '}
                         <div>Labor</div>
                     </div>
                 ),
@@ -25,21 +25,12 @@ const RealmManagementComponent = () => {
             },
             {
                 label: (
-                    <div className="flex flex-col items-center">
-                        <Coin className="mb-2 fill-current" />{' '}
+                    <div className="flex items-center">
+                        <Coin className="mr-2 fill-current" />{' '}
                         <div>Trade</div>
                     </div>
                 ),
                 component: <RealmTradeComponent />,
-            },
-            {
-                label: (
-                    <div className="flex flex-col items-center">
-                        <City className="mb-2 fill-current" />{' '}
-                        <div>Civilians</div>
-                    </div>
-                ),
-                component: <div />,
             }
         ],
         [selectedTab]
@@ -49,7 +40,7 @@ const RealmManagementComponent = () => {
             selectedIndex={selectedTab}
             onChange={(index) => setSelectedTab(index as number)}
             variant="primary"
-            className="flex-1 -m-2"
+            className="flex-1 mt-3"
         >
             <Tabs.List>
                 {tabs.map((tab, index) => (

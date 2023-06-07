@@ -18,11 +18,11 @@ export const VARIANTS = {
   },
   primary: {
     tab: {
-      base: 'relative z-10 !outline-none transition-margin -mb-[1px] duration-300 text-xs flex-grow p-4',
-      active: 'rounded-t-xl -mt-2 border-t border-gold text-gold bg-gradient-to-b from-black to-[#151515]',
+      base: 'relative mx-1 z-10  border-t transition-all duration-200 border-x border-transparent !outline-none -mb-[1px] text-xs py-3 px-2',
+      active: 'rounded-t-xl !border-gold text-gold bg-gradient-to-b from-black to-[#151515]',
       inactive: 'text-gray-gold',
     },
-    tabList: 'flex w-full justify-around',
+    tabList: 'flex w-full',
   },
   small: {
     tab: {
