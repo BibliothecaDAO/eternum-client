@@ -84,7 +84,7 @@ export const MainScene = () => {
         <Canvas
             raycaster={{ params: { Points: { threshold: 0.2 } } }}
             className='rounded-xl'
-            camera={{ fov: 15, position: [0, 700, 0] }}
+            camera={{ fov: 15, position: [0, 700, 0], far: 2000 }}
             dpr={[1, 2]}
             gl={
                 {

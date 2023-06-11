@@ -49,7 +49,7 @@ export const World = () => {
       </BottomRightContainer>
       <EpochCountdown />
       <Leva hidden />
-      <Redirect to="/realmView" />
+      {/* <Redirect to="/realmView" /> */}
     </div>
   );
 };

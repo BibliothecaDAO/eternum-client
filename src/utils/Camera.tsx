@@ -59,7 +59,7 @@ const CameraControls = ({ position, target }: Props) => {
             ref={ref}
             args={[camera, domElement]}
             panSpeed={2}
-            maxDistance={700}
+            maxDistance={1400}
             minDistance={25}
             maxPolarAngle={Math.PI / 3}
             makeDefault
