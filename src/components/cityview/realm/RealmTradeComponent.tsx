@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Tabs } from '../../../elements/tab';
-import { CaravansPanel } from './caravans/CaravansPanel';
+import { CaravansPanel } from './trade/CaravansPanel';
+import { MarketPanel } from './trade/MarketPanel';
 
 type RealmTradeComponentProps = {}
 
@@ -13,7 +14,7 @@ export const RealmTradeComponent = ({ }: RealmTradeComponentProps) => {
             {
                 label: (
                     <div className="flex flex-col items-center">
-                        <div>My Trades</div>
+                        <div>My Offers</div>
                     </div>
                 ),
                 component: <div />,
@@ -24,7 +25,7 @@ export const RealmTradeComponent = ({ }: RealmTradeComponentProps) => {
                         <div>Market</div>
                     </div>
                 ),
-                component: <div />,
+                component: <MarketPanel />,
             },
             {
                 label: (

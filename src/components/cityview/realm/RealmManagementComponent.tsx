@@ -5,6 +5,8 @@ import { ReactComponent as CrossSwords } from '../../../assets/icons/common/cros
 import { ReactComponent as PickAxeSecond } from '../../../assets/icons/common/pick-axe-second.svg';
 import { ReactComponent as Coin } from '../../../assets/icons/common/coin.svg';
 import { ReactComponent as City } from '../../../assets/icons/common/city.svg';
+import { ReactComponent as Map } from '../../../assets/icons/common/map.svg';
+
 import { Tabs } from "../../../elements/tab";
 import RealmTradeComponent from "./RealmTradeComponent";
 
@@ -54,7 +56,8 @@ const RealmManagementComponent = () => {
                     ))}
                 </Tabs.Panels>
             </Tabs>
-            <button className="absolute hover:bg-gold/20 transition-bg duration-200 z-10 px-2 py-1 ml-auto text-xs border rounded-full right-3 top-[4.5rem] text-gold border-gold">
+            <button className="absolute flex items-center hover:bg-gold/20 transition-bg duration-200 z-10 px-3 py-2 ml-auto text-xs border rounded-full right-3 top-[4rem] text-gold border-gold">
+                <Map className='mr-1 fill-current' />
                 Show on map
             </button>
         </>
