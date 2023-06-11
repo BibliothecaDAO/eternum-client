@@ -16,6 +16,7 @@ import RealmManagementModule from "../modules/RealmManagementModule";
 import EpochCountdown from "../components/network/EpochCountdown";
 import RealmStatusComponent from "../components/cityview/realm/RealmStatusComponent";
 import { Redirect } from "wouter";
+import RealmResourcesComponent from "../components/cityview/realm/RealmResourcesComponent";
 
 
 export const World = () => {
@@ -33,7 +34,8 @@ export const World = () => {
         <NetworkModule />
         <div className="flex">
           <NavigationModule />
-          <RealmStatusComponent className="ml-20 -mt-1" />
+          <RealmResourcesComponent className="ml-20 -mt-1" />
+          <RealmStatusComponent className="ml-auto -translate-y-1/2" />
         </div>
 
         {/* <ContextsModule /> */}

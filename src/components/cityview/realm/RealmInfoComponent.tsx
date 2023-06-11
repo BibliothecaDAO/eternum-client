@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ResourceIcon } from '../../../elements/ResourceIcon';
 import { findResourceById } from '../../../constants/resources';
-import { ReactComponent as ShieldIcon } from '../../../assets/icons/common/shield.svg';
 
 type RealmInfoComponentProps = {}
 
@@ -20,10 +19,6 @@ export const RealmInfoComponent = ({ }: RealmInfoComponentProps) => {
                     <div className="text-xxs text-gold">
                         0x...loaf
                     </div>
-                </div>
-                <div className='flex items-center justify-center px-3 py-2 ml-auto text-xs text-white rounded-full cursor-default bg-light-red'>
-                    <ShieldIcon className="mr-2 fill-white" />
-                    <span>Vulnerable</span>
                 </div>
             </div>
         </>
