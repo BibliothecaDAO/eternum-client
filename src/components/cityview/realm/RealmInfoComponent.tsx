@@ -9,7 +9,7 @@ export const RealmInfoComponent = ({ }: RealmInfoComponentProps) => {
 
     return (
         <>
-            <div className="relative text-sm shadow-lg shadow-black/25 flex items-center px-4 py-2 text-white rounded-t-3xl h-[50px] bg-crimson">
+            <div className="relative text-sm shadow-lg shadow-black/25 flex items-center px-4 py-2 text-white h-[50px] bg-crimson">
                 <div className='flex flex-col leading-4'>
                     <div className="font-bold">
                         Miliadea
