@@ -43,7 +43,7 @@ const RealmManagementComponent = () => {
                 selectedIndex={selectedTab}
                 onChange={(index) => setSelectedTab(index as number)}
                 variant="primary"
-                className="flex-1 mt-4"
+                className="flex-1 mt-[6px]"
             >
                 <Tabs.List>
                     {tabs.map((tab, index) => (
@@ -56,7 +56,7 @@ const RealmManagementComponent = () => {
                     ))}
                 </Tabs.Panels>
             </Tabs>
-            <button className="absolute flex items-center hover:bg-gold/20 transition-bg duration-200 z-10 px-3 py-2 ml-auto text-xs border rounded-full right-3 top-[4rem] text-gold border-gold">
+            <button className="absolute flex items-center hover:bg-gold/20 transition-bg duration-200 z-10 px-3 py-2 ml-auto text-xs border rounded-full right-3 top-[3.6rem] text-gold border-gold">
                 <Map className='mr-1 fill-current' />
                 Show on map
             </button>
