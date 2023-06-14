@@ -22,6 +22,7 @@ export default {
         brown: '#24130A',
         'light-red': '#EF5858',
         'dark-green': '#064105',
+        'dark-green-accent': '#3A3D23',
         order: {
           power: '#F4B547',
           giants: '#EB544D',
