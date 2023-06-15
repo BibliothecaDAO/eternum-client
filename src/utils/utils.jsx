@@ -7,6 +7,10 @@ const isRef = (ref) => !!ref.current;
 
 export const resolveRef = (ref) => (isRef(ref) ? ref.current : ref);
 
+export const currencyFormat = (num) => {
+    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+ }
+
 export const wrapEffect = (effectImpl, defaultBlendMode = BlendFunction.ALPHA) =>
     forwardRef(function Wrap({ blendFunction, opacity, ...props }, ref) {
         const invalidate = useThree((state) => state.invalidate);

@@ -2,7 +2,6 @@ import WorldMap from '../../components/worldmap/WorldMap'
 import { Model } from '../../components/worldmap/WorldMap.jsx'
 import RealmsPositions from '../../components/worldmap/RealmsPositions'
 import { Flags } from '../../components/worldmap/Flags.jsx'
-import { Flags_1 } from '../../components/worldmap/Flags_1.jsx'
 import Arcs from '../../components/worldmap/Arcs.jsx'
 import realmsJson from '../../geodata/realms.json';
 import { useEffect, useState } from 'react'

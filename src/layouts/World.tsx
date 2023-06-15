@@ -1,76 +1,57 @@
 import { Background as BackgroundContainer } from "../containers/Background";
-import { BottomNavigation as BottomNavigationContainer } from "../containers/navigation/BottomNavigation";
-import { LeftPopNavigation } from "../containers/navigation/LeftPopNavigation";
-import { RightPopNavigation } from "../containers/navigation/RightPopNavigation";
-import { TopNavigation } from "../containers/navigation/TopNavigation";
 import { MainScene } from "../modules/scenes/MainScene";
-import useUIStore, { Background } from "../hooks/store/useUIStore";
+import { Background } from "../hooks/store/useUIStore";
 import ActiveLink from "../elements/ActiveLink";
 import { Leva } from "leva";
 import { BottomRightContainer } from "../containers/BottomRightContainer";
 import ChatModule from "../modules/ChatModule";
-import TopRightContainer from "../containers/TopRightContainer";
 import NetworkModule from "../modules/NetworkModule";
 import BottomMiddleContainer from "../containers/BottomMiddleContainer";
 import WolrdMapLayersModule from "../modules/WorldMapLayersModule";
-import TopLeftContainer from "../containers/TopLeftContainer";
+import TopContainer from "../containers/TopContainer";
 import ContextsModule from "../modules/ContextsModule";
-import BottomLeftContainer from "../containers/BottomLeftContainer";
 import NavigationModule from "../modules/NavigationModule";
 import ContentContainer from "../containers/ContentContainer";
 import RealmManagementModule from "../modules/RealmManagementModule";
+import EpochCountdown from "../components/network/EpochCountdown";
+import RealmStatusComponent from "../components/cityview/realm/RealmStatusComponent";
+import { Redirect } from "wouter";
+import RealmResourcesComponent from "../components/cityview/realm/RealmResourcesComponent";
 
 
 export const World = () => {
 
-  const activeScene = useUIStore((state) => state.activeScene);
-  const setActiveScene = useUIStore((state) => state.setActiveScene);
 
-  const backgroundLabels: Record<Background, string> = {
-    map: 'Map',
-    realmView: 'Realm View',
-    combat: 'Combat',
-    bastion: 'Bastion',
-  };
-
-  const backgroundOptions: Background[] = ['map', 'bastion', 'realmView'];
 
   return (
-    <div className="fixed top-0 left-0 z-0 w-screen h-screen">
-      {/* <LeftPopNavigation>
-        {backgroundOptions.map((option) => (
-          <ActiveLink
-            key={option}
-            className={`px-2`}
-            href={"/" + option}
-          >
-            {backgroundLabels[option]}
-          </ActiveLink>
-        ))}
-      </LeftPopNavigation> */}
-      <BackgroundContainer>
+    <div className="fixed top-0 left-0 z-0 w-screen h-screen p-2">
+      <BackgroundContainer className="border-2 border-[#E0AF65] rounded-xl relative">
+        <div className="absolute top-0 left-0 z-10 w-full pointer-events-none rounded-xl h-44 bg-gradient-to-b from-black to-transparent opacity-90" />
         <MainScene />
+        <div className="absolute bottom-0 left-0 z-10 w-full pointer-events-none rounded-xl h-44 bg-gradient-to-t from-black to-transparent opacity-90" />
       </BackgroundContainer>
-      <TopLeftContainer>
-        <ContextsModule />
-      </TopLeftContainer>
-      <TopRightContainer>
+      <TopContainer>
         <NetworkModule />
-      </TopRightContainer>
+        <div className="flex">
+          <NavigationModule />
+          <RealmResourcesComponent className="ml-20 -mt-1" />
+          <RealmStatusComponent className="ml-auto -translate-y-1/2" />
+        </div>
+
+        {/* <ContextsModule /> */}
+      </TopContainer>
       <ContentContainer>
         <RealmManagementModule />
       </ContentContainer>
-      <BottomLeftContainer>
-        <NavigationModule />
-      </BottomLeftContainer>
       <BottomMiddleContainer>
         <WolrdMapLayersModule />
       </BottomMiddleContainer>
       <BottomRightContainer>
         <ChatModule />
       </BottomRightContainer>
+      <EpochCountdown />
       <Leva hidden />
-      <div className="fixed z-0 border-2 border-white border-solid pointer-events-none border-opacity-20 left-3 right-3 bottom-3 top-3 rounded-xl" />
+      {/* <Redirect to="/realmView" /> */}
     </div>
   );
 };

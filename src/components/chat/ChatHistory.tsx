@@ -7,7 +7,10 @@ interface ChatHistoryProps {
 const ChatHistory = (props: ChatHistoryProps) => {
 
     return (
-        <div className="flex flex-col h-full overflow-auto">
+        <div className="relative flex flex-col h-full overflow-auto">
+            <div className="sticky -m-2 z-10 top-0 left-0 w-full h-20 bg-gradient-to-b from-[#1B1B1B] to-transparent">
+                &nbsp;
+            </div>
             {props.messages.map((message, index) => (
                 <ChatMessage key={index} {...message} />
             ))}

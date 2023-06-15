@@ -7,7 +7,7 @@ interface BottomRightContainerProps {
 
 export const BottomRightContainer = ({ children }: BottomRightContainerProps) => {
     return (
-        <BaseContainer className="absolute w-1/4 h-56 bottom-6 right-6">
+        <BaseContainer className="absolute w-1/4 h-[550px] bottom-10 right-6" expandable>
             {children}
         </BaseContainer>
     );

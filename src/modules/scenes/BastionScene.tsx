@@ -1,4 +1,3 @@
-// import BastionView from '../../components/bastion/Bastion'
 import { Model } from '../../components/bastion/Bastion.jsx'
 
 export const BastionScene = () => {

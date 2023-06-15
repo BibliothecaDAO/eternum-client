@@ -1,6 +1,5 @@
 import { Effect } from 'postprocessing'
 import { wrapEffect } from "./utils.jsx";
-
 class SobelEffect extends Effect {
     constructor() {
         super(

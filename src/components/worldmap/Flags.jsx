@@ -210,4 +210,4 @@ export function Flags (props) {
 }
 
   
-useGLTF.preload('/models/flag-transformed.glb')
+useGLTF.preload('/models/flags_1-transformed.glb')

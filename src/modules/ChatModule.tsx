@@ -1,5 +1,6 @@
 import ChatForm from "../components/chat/ChatForm"
 import ChatHistory from "../components/chat/ChatHistory"
+import { ChatTabs } from "../components/chat/ChatTabs";
 import { ChatMessageProps } from "../elements/ChatMessage";
 
 const dummyMessages: ChatMessageProps[] = [
@@ -97,6 +98,7 @@ const dummyMessages: ChatMessageProps[] = [
 
 const ChatModule = () => {
     return (<>
+        <ChatTabs />
         <ChatHistory messages={dummyMessages} />
         <ChatForm />
     </>)

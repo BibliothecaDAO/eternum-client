@@ -1,12 +1,13 @@
-import RealmInfoComponent from "../components/RealmInfoComponent"
-import RealmManagementComponent from "../components/RealmManagementComponent"
+import RealmInfoComponent from "../components/cityview/realm/RealmInfoComponent"
+import RealmManagementComponent from "../components/cityview/realm/RealmManagementComponent"
+import { BaseContainer } from "../containers/BaseContainer"
 
 const RealmManagementModule = () => {
     return (
-        <div className="flex flex-col w-full">
+        <BaseContainer className="h-full !p-0">
             <RealmInfoComponent />
             <RealmManagementComponent />
-        </div>
+        </BaseContainer>
     )
 }
 
